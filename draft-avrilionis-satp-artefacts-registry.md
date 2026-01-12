@@ -1,5 +1,4 @@
-# ---
-
+---
 stand_alone: yes
 pi:
   rfcedstyle: yes
