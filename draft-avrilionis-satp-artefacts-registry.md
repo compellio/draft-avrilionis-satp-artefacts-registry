@@ -17,7 +17,7 @@ pi:
 
 title: Artefacts Registry
 abbrev: Registry
-docname: draft-ietf-satp-avrilionis-artefacts-registry
+docname: draft-avrilionis-satp-artefacts-registry-latest
 category: info
 
 ipr: trust200902
