@@ -18,6 +18,7 @@ title: Artefacts Registry
 abbrev: Registry
 docname: draft-avrilionis-satp-artefacts-registry-latest
 category: info
+submissiontype: IETF
 
 ipr: trust200902
 area: "Applications and Real-Time"
@@ -37,16 +38,14 @@ venue:
 
 author:
 
-  -
-    ins: D. Avrilionis
-    name: Denis Avrilionis
-    organization: Compellio S.A.
-    email: denis@compellio.com
-  -
-    ins: T. Hardjono
-    name: Thomas Hardjono
-    organization: MIT
-    email: hardjono@mit.edu
+- ins: D. Avrilionis
+  name: Denis Avrilionis
+  organization: Compellio S.A.
+  email: denis@compellio.com
+- ins: T. Hardjono
+  name: Thomas Hardjono
+  organization: MIT
+  email: hardjono@mit.edu
 
 informative:
   NIST:
@@ -72,7 +71,7 @@ informative:
     target: https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica
     title: EU Directive on Markets in Crypto-Assets Regulation (MiCA)
 
- CORE:
+  CORE:
     author:
     - ins: M. Hargreaves
     - ins: T. Hardjono
@@ -92,7 +91,7 @@ informative:
     target: https://datatracker.ietf.org/doc/draft-ietf-satp-architecture/
     title: Secure Asset Transfer (SAT) Interoperability Architecture
 
- REGARCH:
+  REGARCH:
     author:
     - ins: D. Avrilionis
     - ins: T. Hardjono
@@ -100,20 +99,20 @@ informative:
     target: https://datatracker.ietf.org/doc/draft-ietf-satp-architecture/
     title: Asset Schema Architecture for Asset Exchange
 
-TERM:
-    author:
-    - ins: T. Hardjono
-    date: Nov 2025
-    target: https://datatracker.ietf.org/doc/draft-hardjono-satp-terminology/
-    title: Secure Asset Transfer Protocol (SATP) Terminology
+  TERM:
+      author:
+      - ins: T. Hardjono
+      date: Nov 2025
+      target: https://datatracker.ietf.org/doc/draft-hardjono-satp-terminology/
+      title: Secure Asset Transfer Protocol (SATP) Terminology
 
-STAGE0:
-    author:
-    - ins: D. Avrilionis
-    - ins: T. Hardjono
-    date: Nov 2025
-    target: https://datatracker.ietf.org/doc/draft-avrilionis-satp-setup-stage/
-    title: SATP Setup Stage
+  STAGE0:
+      author:
+      - ins: D. Avrilionis
+      - ins: T. Hardjono
+      date: Nov 2025
+      target: https://datatracker.ietf.org/doc/draft-avrilionis-satp-setup-stage/
+      title: SATP Setup Stage
 
   RFC5939: RFC5939
 
