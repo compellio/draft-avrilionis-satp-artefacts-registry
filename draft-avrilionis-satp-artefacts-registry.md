@@ -33,8 +33,8 @@ venue:
   type: "Working Group"
   mail: "sat@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/sat/"
-  github: "ietf-satp/draft-ietf-satp-core"
-  latest: "https://ietf-satp.github.io/draft-ietf-satp-core/draft-ietf-satp-core.html"
+  github: "compellio/draft-avrilionis-satp-artefacts-registry"
+  latest: "https://compellio.github.io/draft-avrilionis-satp-artefacts-registry/draft-avrilionis-satp-artefacts-registry.html"
 
 author:
 
@@ -144,11 +144,11 @@ This memo describes the Artefacts Registry for Asset Exchange API. The Registry 
 
 {: #introduction-doc}
 
-This memo proposes an API intended to be implemented by Registries in the context of SATP.  The Registry is a component that exposes an API allowing gateways to fetch artefacts related to the SAT protocol. Examples of SATP artefacts are network identifiers, entities identifiers, asset profiles, or asset instances. 
+This memo proposes an API intended to be implemented by Registries in the context of SATP.  The Registry is a component that exposes an API allowing gateways to fetch artefacts related to the SAT protocol. Examples of SATP artefacts are network identifiers, entities identifiers, asset profiles, or asset instances.
 
-Readers are directed first to {{REGARCH}} for a description of the architecture underlying the Registries. Registries play an important role in maintaining record of artefacts that are important during the Setup Stage of SATP (a.k.a “Stage 0”).  
+Readers are directed first to {{REGARCH}} for a description of the architecture underlying the Registries. Registries play an important role in maintaining record of artefacts that are important during the Setup Stage of SATP (a.k.a “Stage 0”).
 
-Registries are are acting as persistent storage locations for such artefacts. once registered, artefacts cannot be removed.  New versions are appended in the Registry without removing previous versions (append-only principle). 
+Registries are are acting as persistent storage locations for such artefacts. once registered, artefacts cannot be removed.  New versions are appended in the Registry without removing previous versions (append-only principle).
 
 All API calls are assumed to run over TLS1.2 or higher, and the endpoints of the registry are associated with a certificate indicating the legal owner (or operator) of the gateway. HTTPS must be used instead of plain HTTP.
 
@@ -207,7 +207,7 @@ The Registry API pertains to the interaction between gateways through API3. See 
 {: #registry-role}
 
 
-The model for SATP is shown in Figure 1 {{ARCH}}. The three stages of the SATP protocol are described in {{CORE}}. Prior to the initiation of SATP the peer gateways may access artefacts related to networks, assets or the gateway themselves. Registries are used to maintain record of such artefacts. Registries are of particular importance in the interactions between the peer gateways during the setup stage (Stage-0) {{STAGE0}} 
+The model for SATP is shown in Figure 1 {{ARCH}}. The three stages of the SATP protocol are described in {{CORE}}. Prior to the initiation of SATP the peer gateways may access artefacts related to networks, assets or the gateway themselves. Registries are used to maintain record of such artefacts. Registries are of particular importance in the interactions between the peer gateways during the setup stage (Stage-0) {{STAGE0}}
 
 # Registry API Message Format, identifiers and Descriptors
 
