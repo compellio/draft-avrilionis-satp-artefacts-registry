@@ -187,6 +187,7 @@ The Registry API pertains to the interaction between gateways. In {{ARCH}} such 
       |        |                    |
       |        V                    |
       |      +---+----------+       |
+      |      |   |          |       | 
       |      |   | Registry |       |
       |      |API|    R1    |       |
       |      |(3)|          |       |
