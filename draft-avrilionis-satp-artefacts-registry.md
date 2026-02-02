@@ -183,7 +183,7 @@ The artefacts recorded via registries are called Tokenized Asset Records or TARs
 
 The Registry API pertains to the interaction between gateways through API3. See {{ARCH}} for more details.
 
-```
+
                  +----------+                +----------+\
                  |  Client  |                | Off-net  |\
           ------ |   (App)  |                | Resource |\
@@ -201,7 +201,7 @@ The Registry API pertains to the interaction between gateways through API3. See 
        |     |   |         |    |        |    |         |   |     |\
        +-----+   +---------+----+        +----+---------+   +-----+\
                                Figure 1\
-```
+
 
 ## The role of the Registry in SATP
 
