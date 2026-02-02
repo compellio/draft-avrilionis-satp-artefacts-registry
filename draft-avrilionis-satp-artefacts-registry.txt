@@ -5,8 +5,8 @@
 Secure Asset Transfer Protocol                             D. Avrilionis
 Internet-Draft                                            Compellio S.A.
 Intended status: Informational                               T. Hardjono
-Expires: 16 July 2026                                                MIT
-                                                         12 January 2026
+Expires: 6 August 2026                                               MIT
+                                                         2 February 2026
 
 
                            Artefacts Registry
@@ -27,11 +27,11 @@ About This Document
 
    This note is to be removed before publishing as an RFC.
 
-   The latest revision of this draft can be found at https://ietf-
-   satp.github.io/draft-ietf-satp-core/draft-ietf-satp-core.html.
-   Status information for this document may be found at
-   https://datatracker.ietf.org/doc/draft-avrilionis-satp-artefacts-
-   registry/.
+   The latest revision of this draft can be found at
+   https://compellio.github.io/draft-avrilionis-satp-artefacts-registry/
+   draft-avrilionis-satp-artefacts-registry.html.  Status information
+   for this document may be found at https://datatracker.ietf.org/doc/
+   draft-avrilionis-satp-artefacts-registry/.
 
    Discussion of this document takes place on the Secure Asset Transfer
    Protocol Working Group mailing list (mailto:sat@ietf.org), which is
@@ -39,7 +39,8 @@ About This Document
    at https://www.ietf.org/mailman/listinfo/sat/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/ietf-satp/draft-ietf-satp-core.
+   https://github.com/compellio/draft-avrilionis-satp-artefacts-
+   registry.
 
 Status of This Memo
 
@@ -56,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 July 2026.
+   This Internet-Draft will expire on 6 August 2026.
 
 Copyright Notice
 
@@ -158,17 +159,27 @@ Table of Contents
    The Registry API pertains to the interaction between gateways through
    API3.  See [ARCH] for more details.
 
-   +----------+ +----------+ | Client | | Off-net | ------ | (App) | |
-   Resource | | +----------+ +----------+ | | | API3 | | |
-   +----------+ | | ^ | V | | +---------+ | V | API1 | | +-----+
-   +---------+----+ +----+---------+ +-----+ | | | | | | | | | | |
-   Net.| | Gateway |API2| |API2| Gateway | | Net.| | NW1 |---|
-   G1 | |<------>| | G2 |---| NW2 | | | | | | | | | | | +-----+
-   +---------+----+ +----+---------+ +-----+ Figure 1
+                    +----------+                +----------+\
+                    |  Client  |                | Off-net  |\
+             ------ |   (App)  |                | Resource |\
+             |      +----------+                +----------+\
+             |           |                      |   API3   |\
+             |           |                      +----------+\
+             |           |                           ^\
+             |           V                           |\
+             |      +---------+                      |\
+             V      |   API1  |                      |\
+          +-----+   +---------+----+        +----+---------+   +-----+\
+          |     |   |         |    |        |    |         |   |     |\
+          | Net.|   | Gateway |API2|        |API2| Gateway |   | Net.|\
+          | NW1 |---|    G1   |    |<------>|    |    G2   |---| NW2 |\
+          |     |   |         |    |        |    |         |   |     |\
+          +-----+   +---------+----+        +----+---------+   +-----+\
+                                  Figure 1\
 
 4.2.  The role of the Registry in SATP
 
-   The model for SATP is shown in Figure 1 [ARCH].  The three stages of
+   TThe model for SATP is shown in Figure 1 [ARCH].  The three stages of
    the SATP protocol are described in [CORE].  Prior to the initiation
    of SATP the peer gateways may access artefacts related to networks,
    assets or the gateway themselves.  Registries are used to maintain
