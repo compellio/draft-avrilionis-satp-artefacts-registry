@@ -166,6 +166,7 @@ Table of Contents
          |        |                    |
          |        V                    |
          |      +---+----------+       |
+         |      |   |          |       |
          |      |   | Registry |       |
          |      |API|    R1    |       |
          |      |(3)|          |       |
