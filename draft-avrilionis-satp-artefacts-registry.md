@@ -143,13 +143,11 @@ This memo describes the Artefacts Registry for Asset Exchange API. The Registry 
 
 {: #introduction-doc}
 
-This memo proposes an API intended to be implemented by Registries in the context of SATP.  The Registry is a component that exposes an API allowing gateways to fetch artefacts related to the SAT protocol. Examples of SATP artefacts are network identifiers, entities identifiers, asset profiles, or asset instances.
+This memo proposes an API intended to be implemented by Registries in the context of SATP. The Registry is a component that exposes an API allowing gateways to fetch artefacts related to the SAT protocol. Examples of SATP artefacts are network identifiers, entities identifiers, asset profiles, or asset instances.
 
-Readers are directed first to {{REGARCH}} for a description of the architecture underlying the Registries. Registries play an important role in maintaining record of artefacts that are important during the Setup Stage of SATP (a.k.a “Stage 0”).
+Registries play an important role in maintaining record of artefacts that are important during the Setup Stage of SATP (a.k.a “Stage 0”). Registries are are acting as persistent storage locations for such artefacts. once registered, artefacts cannot be removed. New versions are appended in the Registry without removing previous versions (append-only principle). Readers are directed first to {{REGARCH}} for a description of the architecture underlying the Registries.
 
-Registries are are acting as persistent storage locations for such artefacts. once registered, artefacts cannot be removed.  New versions are appended in the Registry without removing previous versions (append-only principle).
-
-All API calls are assumed to run over TLS1.2 or higher, and the endpoints of the registry are associated with a certificate indicating the legal owner (or operator) of the gateway. HTTPS must be used instead of plain HTTP.
+All API calls are assumed to run over TLS1.2 or higher, and the endpoints of the registry are associated with a certificate indicating the legal owner (or operator) of the Registry. HTTPS must be used instead of plain HTTP.
 
 # Conventions used in this document
 
@@ -182,23 +180,27 @@ The artefacts recorded via registries are called Tokenized Asset Records or TARs
 The Registry API pertains to the interaction between gateways through API3. See {{ARCH}} for more details.
 
 ~~~
-                 +----------+                +----------+
-                 |  Client  |                | Off-net  |
-          ------ |   (App)  |                | Resource |
-          |      +----------+                +----------+
-          |           |                      |   API3   |
-          |           |                      +----------+
-          |           |                           ^
-          |           V                           |
-          |      +---------+                      |
-          V      |   API1  |                      |
-       +-----+   +---------+----+        +----+---------+   +-----+
-       |     |   |         |    |        |    |         |   |     |
-       | Net.|   | Gateway |API2|        |API2| Gateway |   | Net.|
-       | NW1 |---|    G1   |    |<------>|    |    G2   |---| NW2 |
-       |     |   |         |    |        |    |         |   |     |
-       +-----+   +---------+----+        +----+---------+   +-----+
-                               Figure 1
+                               +----------+
+                               |  Client  |
+      ------------------------ |   (App)  |
+      |        |               +----------+
+      |        |                    |
+      |        V                    |
+      |      +---+----------+       |
+      |      |   | Registry |       |
+      |      |API|    R1    |       |
+      |      |   |          |       |
+      |      +---+----------+       V
+      |        ^               +---------+
+      V        |               |   API1  |
+   +-----+     |               +---------+----+
+   |     |     ----------------|         |    |
+   | Net.|                     | Gateway |API2|
+   | NW1 |---------------------|    G1   |    |
+   |     |                     |         |    |
+   +-----+                     +---------+----+
+
+                  Figure 1
 ~~~
 
 ## The role of the Registry in SATP
