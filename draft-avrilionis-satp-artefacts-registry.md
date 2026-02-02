@@ -189,7 +189,7 @@ The Registry API pertains to the interaction between gateways through API3. See 
       |      +---+----------+       |
       |      |   | Registry |       |
       |      |API|    R1    |       |
-      |      |   |          |       |
+      |      |(3)|          |       |
       |      +---+----------+       V
       |        ^               +---------+
       V        |               |   API1  |
