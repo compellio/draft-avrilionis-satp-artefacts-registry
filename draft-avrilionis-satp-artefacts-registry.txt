@@ -155,8 +155,9 @@ Table of Contents
 
 4.1.  Overview
 
-   The Registry API pertains to the interaction between gateways through
-   API3.  See [ARCH] for more details.
+   The Registry API pertains to the interaction between gateways.  In
+   [ARCH] such interface was identied as "API3" - see [ARCH] for more
+   details.
 
                                   +----------+
                                   |  Client  |
