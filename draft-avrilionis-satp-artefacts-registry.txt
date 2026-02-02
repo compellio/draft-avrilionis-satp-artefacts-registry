@@ -119,19 +119,18 @@ Table of Contents
    Examples of SATP artefacts are network identifiers, entities
    identifiers, asset profiles, or asset instances.
 
-   Readers are directed first to [REGARCH] for a description of the
-   architecture underlying the Registries.  Registries play an important
-   role in maintaining record of artefacts that are important during the
-   Setup Stage of SATP (a.k.a “Stage 0”).
-
+   Registries play an important role in maintaining record of artefacts
+   that are important during the Setup Stage of SATP (a.k.a “Stage 0”).
    Registries are are acting as persistent storage locations for such
    artefacts. once registered, artefacts cannot be removed.  New
    versions are appended in the Registry without removing previous
-   versions (append-only principle).
+   versions (append-only principle).  Readers are directed first to
+   [REGARCH] for a description of the architecture underlying the
+   Registries.
 
    All API calls are assumed to run over TLS1.2 or higher, and the
    endpoints of the registry are associated with a certificate
-   indicating the legal owner (or operator) of the gateway.  HTTPS must
+   indicating the legal owner (or operator) of the Registry.  HTTPS must
    be used instead of plain HTTP.
 
 2.  Conventions used in this document
@@ -159,23 +158,27 @@ Table of Contents
    The Registry API pertains to the interaction between gateways through
    API3.  See [ARCH] for more details.
 
-                    +----------+                +----------+
-                    |  Client  |                | Off-net  |
-             ------ |   (App)  |                | Resource |
-             |      +----------+                +----------+
-             |           |                      |   API3   |
-             |           |                      +----------+
-             |           |                           ^
-             |           V                           |
-             |      +---------+                      |
-             V      |   API1  |                      |
-          +-----+   +---------+----+        +----+---------+   +-----+
-          |     |   |         |    |        |    |         |   |     |
-          | Net.|   | Gateway |API2|        |API2| Gateway |   | Net.|
-          | NW1 |---|    G1   |    |<------>|    |    G2   |---| NW2 |
-          |     |   |         |    |        |    |         |   |     |
-          +-----+   +---------+----+        +----+---------+   +-----+
-                                  Figure 1
+                                  +----------+
+                                  |  Client  |
+         ------------------------ |   (App)  |
+         |        |               +----------+
+         |        |                    |
+         |        V                    |
+         |      +---+----------+       |
+         |      |   | Registry |       |
+         |      |API|    R1    |       |
+         |      |   |          |       |
+         |      +---+----------+       V
+         |        ^               +---------+
+         V        |               |   API1  |
+      +-----+     |               +---------+----+
+      |     |     ----------------|         |    |
+      | Net.|                     | Gateway |API2|
+      | NW1 |---------------------|    G1   |    |
+      |     |                     |         |    |
+      +-----+                     +---------+----+
+
+                     Figure 1
 
 4.2.  The role of the Registry in SATP
 

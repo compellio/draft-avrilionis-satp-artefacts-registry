@@ -1281,11 +1281,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <div id="introduction-doc">
-<p id="section-1-1">This memo proposes an API intended to be implemented by Registries in the context of SATP.  The Registry is a component that exposes an API allowing gateways to fetch artefacts related to the SAT protocol. Examples of SATP artefacts are network identifiers, entities identifiers, asset profiles, or asset instances.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">This memo proposes an API intended to be implemented by Registries in the context of SATP. The Registry is a component that exposes an API allowing gateways to fetch artefacts related to the SAT protocol. Examples of SATP artefacts are network identifiers, entities identifiers, asset profiles, or asset instances.<a href="#section-1-1" class="pilcrow">¶</a></p>
 </div>
-<p id="section-1-2">Readers are directed first to <span>[<a href="#REGARCH" class="cite xref">REGARCH</a>]</span> for a description of the architecture underlying the Registries. Registries play an important role in maintaining record of artefacts that are important during the Setup Stage of SATP (a.k.a “Stage 0”).<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">Registries are are acting as persistent storage locations for such artefacts. once registered, artefacts cannot be removed.  New versions are appended in the Registry without removing previous versions (append-only principle).<a href="#section-1-3" class="pilcrow">¶</a></p>
-<p id="section-1-4">All API calls are assumed to run over TLS1.2 or higher, and the endpoints of the registry are associated with a certificate indicating the legal owner (or operator) of the gateway. HTTPS must be used instead of plain HTTP.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-2">Registries play an important role in maintaining record of artefacts that are important during the Setup Stage of SATP (a.k.a “Stage 0”). Registries are are acting as persistent storage locations for such artefacts. once registered, artefacts cannot be removed. New versions are appended in the Registry without removing previous versions (append-only principle). Readers are directed first to <span>[<a href="#REGARCH" class="cite xref">REGARCH</a>]</span> for a description of the architecture underlying the Registries.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">All API calls are assumed to run over TLS1.2 or higher, and the endpoints of the registry are associated with a certificate indicating the legal owner (or operator) of the Registry. HTTPS must be used instead of plain HTTP.<a href="#section-1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-used-in-this-document">
@@ -1329,23 +1328,27 @@ interpreted as carrying significance described in RFC 2119.<a href="#section-2-2
 </div>
 <div class="alignLeft art-text artwork" id="section-4.1-2">
 <pre>
-                 +----------+                +----------+
-                 |  Client  |                | Off-net  |
-          ------ |   (App)  |                | Resource |
-          |      +----------+                +----------+
-          |           |                      |   API3   |
-          |           |                      +----------+
-          |           |                           ^
-          |           V                           |
-          |      +---------+                      |
-          V      |   API1  |                      |
-       +-----+   +---------+----+        +----+---------+   +-----+
-       |     |   |         |    |        |    |         |   |     |
-       | Net.|   | Gateway |API2|        |API2| Gateway |   | Net.|
-       | NW1 |---|    G1   |    |&lt;------&gt;|    |    G2   |---| NW2 |
-       |     |   |         |    |        |    |         |   |     |
-       +-----+   +---------+----+        +----+---------+   +-----+
-                               Figure 1
+                               +----------+
+                               |  Client  |
+      ------------------------ |   (App)  |
+      |        |               +----------+
+      |        |                    |
+      |        V                    |
+      |      +---+----------+       |
+      |      |   | Registry |       |
+      |      |API|    R1    |       |
+      |      |   |          |       |
+      |      +---+----------+       V
+      |        ^               +---------+
+      V        |               |   API1  |
+   +-----+     |               +---------+----+
+   |     |     ----------------|         |    |
+   | Net.|                     | Gateway |API2|
+   | NW1 |---------------------|    G1   |    |
+   |     |                     |         |    |
+   +-----+                     +---------+----+
+
+                  Figure 1
 </pre><a href="#section-4.1-2" class="pilcrow">¶</a>
 </div>
 </section>
