@@ -35,7 +35,7 @@ venue:
   arch: "https://mailarchive.ietf.org/arch/browse/sat/"
   github: "compellio/draft-avrilionis-satp-artefacts-registry"
   latest: "https://compellio.github.io/draft-avrilionis-satp-artefacts-registry/draft-avrilionis-satp-artefacts-registry.html"
-  
+\
 
 author:
 
@@ -183,25 +183,25 @@ The artefacts recorded via registries are called Tokenized Asset Records or TARs
 
 The Registry API pertains to the interaction between gateways through API3. See {{ARCH}} for more details.
 
-```
-                 +----------+                +----------+  
-                 |  Client  |                | Off-net  |  
-          ------ |   (App)  |                | Resource |  
-          |      +----------+                +----------+  
-          |           |                      |   API3   |  
-          |           |                      +----------+  
-          |           |                           ^  
-          |           V                           |  
-          |      +---------+                      |  
-          V      |   API1  |                      |  
-       +-----+   +---------+----+        +----+---------+   +-----+  
-       |     |   |         |    |        |    |         |   |     |  
-       | Net.|   | Gateway |API2|        |API2| Gateway |   | Net.|  
-       | NW1 |---|    G1   |    |<------>|    |    G2   |---| NW2 |  
-       |     |   |         |    |        |    |         |   |     |  
-       +-----+   +---------+----+        +----+---------+   +-----+  
-                               Figure 1  
-```
+~~~
+                 +----------+                +----------+\
+                 |  Client  |                | Off-net  |\
+          ------ |   (App)  |                | Resource |\
+          |      +----------+                +----------+\
+          |           |                      |   API3   |\
+          |           |                      +----------+\
+          |           |                           ^\
+          |           V                           |\
+          |      +---------+                      |\
+          V      |   API1  |                      |\
+       +-----+   +---------+----+        +----+---------+   +-----+\
+       |     |   |         |    |        |    |         |   |     |\
+       | Net.|   | Gateway |API2|        |API2| Gateway |   | Net.|\
+       | NW1 |---|    G1   |    |<------>|    |    G2   |---| NW2 |\
+       |     |   |         |    |        |    |         |   |     |\
+       +-----+   +---------+----+        +----+---------+   +-----+\
+                               Figure 1\
+~~~
 
 ## The role of the Registry in SATP
 
