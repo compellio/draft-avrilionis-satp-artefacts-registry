@@ -208,7 +208,7 @@ The Registry API pertains to the interaction between gateways through API3. See 
 {: #registry-role}
 
 
-The model for SATP is shown in Figure 1 {{ARCH}}. The three stages of the SATP protocol are described in {{CORE}}. Prior to the initiation of SATP the peer gateways may access artefacts related to networks, assets or the gateway themselves. Registries are used to maintain record of such artefacts. Registries are of particular importance in the interactions between the peer gateways during the setup stage (Stage-0) {{STAGE0}}
+TThe model for SATP is shown in Figure 1 {{ARCH}}. The three stages of the SATP protocol are described in {{CORE}}. Prior to the initiation of SATP the peer gateways may access artefacts related to networks, assets or the gateway themselves. Registries are used to maintain record of such artefacts. Registries are of particular importance in the interactions between the peer gateways during the setup stage (Stage-0) {{STAGE0}}
 
 # Registry API Message Format, identifiers and Descriptors
 
