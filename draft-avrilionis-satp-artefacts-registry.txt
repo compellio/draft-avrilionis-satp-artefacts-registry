@@ -5,8 +5,8 @@
 Secure Asset Transfer Protocol                             D. Avrilionis
 Internet-Draft                                            Compellio S.A.
 Intended status: Informational                               T. Hardjono
-Expires: 6 August 2026                                               MIT
-                                                         2 February 2026
+Expires: 8 August 2026                                               MIT
+                                                         4 February 2026
 
 
                            Artefacts Registry
@@ -16,12 +16,12 @@ Abstract
 
    This memo describes the Artefacts Registry for Asset Exchange API.
    The Registry is a component that exposes an API allowing gateways to
-   fetch artefacts related to the SAT protocol.  Examples of SATP
-   artefacts are network identifiers, entities identifiers, asset
-   profiles, or asset instances.  Registries are are acting as
-   persistent storage locations for such artefacts. once registered,
-   artefacts cannot be removed.  New versions are appended in the
-   Registry without removing previous versions (append-only principle).
+   fetch information related to the SAT protocol.  Examples information
+   stored in the Artefacts Registry are network identifiers, entities
+   identifiers, asset profiles, or asset instances.  Registries are are
+   acting as persistent storage locations for records.  Once registered,
+   records cannot be removed.  New versions are appended in the Registry
+   without removing previous versions (append-only principle).
 
 About This Document
 
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 August 2026.
+   This Internet-Draft will expire on 8 August 2026.
 
 Copyright Notice
 
@@ -190,6 +190,19 @@ Table of Contents
    are used to maintain record of such artefacts.  Registries are of
    particular importance in the interactions between the peer gateways
    during the setup stage (Stage-0) [STAGE0]
+
+   Records stored in a registry are persisted in the form of Tokenized
+   Artefacts.  In summary the main concepts of a Tokenized Arefact
+   Record are as follows: - The Artefact: This is a piece of information
+   containing digitized data or pointing to assets.  It can range from
+   configuration data, execution log, network identifier, as well as any
+   form of tangible or intangible asset, such as real estate, art,
+   company shares, or even intellectual property. - The Token: A digital
+   token is created on a network to represent a specific piece of
+   information or an asset. - The Record: The token acts as the
+   immutable record of ownership.  It contains vital data about the
+   artefact (metadata), ownership history, and rules for transfer, all
+   secured by a network.
 
 5.  Registry API Message Format, identifiers and Descriptors
 
