@@ -193,16 +193,20 @@ Table of Contents
 
    Records stored in a registry are persisted in the form of Tokenized
    Artefacts.  In summary the main concepts of a Tokenized Arefact
-   Record are as follows: - The Artefact: This is a piece of information
-   containing digitized data or pointing to assets.  It can range from
-   configuration data, execution log, network identifier, as well as any
-   form of tangible or intangible asset, such as real estate, art,
-   company shares, or even intellectual property. - The Token: A digital
-   token is created on a network to represent a specific piece of
-   information or an asset. - The Record: The token acts as the
-   immutable record of ownership.  It contains vital data about the
-   artefact (metadata), ownership history, and rules for transfer, all
-   secured by a network.
+   Record are as follows:
+
+   *  The Artefact: This is a piece of information containing digitized
+      data or pointing to assets.  It can range from configuration data,
+      execution log, network identifier, as well as any form of tangible
+      or intangible asset, such as real estate, art, company shares, or
+      even intellectual property.
+
+   *  The Token: A digital token is created on a network to represent a
+      specific piece of information or an asset.
+
+   *  The Record: The token acts as the immutable record of ownership.
+      It contains vital data about the artefact (metadata), ownership
+      history, and rules for transfer, all secured by a network.
 
 5.  Registry API Message Format, identifiers and Descriptors
 
