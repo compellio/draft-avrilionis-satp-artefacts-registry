@@ -135,7 +135,7 @@ normative:
 
 --- abstract
 
-This memo describes the Artefacts Registry for Asset Exchange API. The Registry is a component that exposes an API allowing gateways to fetch artefacts related to the SAT protocol. Examples of SATP artefacts are network identifiers, entities identifiers, asset profiles, or asset instances. Registries are are acting as persistent storage locations for such artefacts. once registered, artefacts cannot be removed.  New versions are appended in the Registry without removing previous versions (append-only principle).
+This memo describes the Artefacts Registry for Asset Exchange API. The Registry is a component that exposes an API allowing gateways to fetch information related to the SAT protocol. Examples information stored in the Artefacts Registry are network identifiers, entities identifiers, asset profiles, or asset instances. Registries are are acting as persistent storage locations for records. Once registered, records cannot be removed.  New versions are appended in the Registry without removing previous versions (append-only principle).
 
 --- middle
 
@@ -210,6 +210,12 @@ The Registry API pertains to the interaction between gateways. In {{ARCH}} such 
 
 
 The three stages of the SATP protocol are described in {{CORE}}. Prior to the initiation of SATP the peer gateways may access artefacts related to networks, assets or the gateway themselves. Registries are used to maintain record of such artefacts. Registries are of particular importance in the interactions between the peer gateways during the setup stage (Stage-0) {{STAGE0}}
+
+Records stored in a registry are persisted in the form of Tokenized Artefacts. In summary the main concepts of a Tokenized Arefact Record are as follows: 
+- The Artefact: This is a piece of information containing digitized data or pointing to assets. It can range from configuration data, execution log, network identifier, as well as any form of tangible or intangible asset, such as real estate, art, company shares, or even intellectual property.
+- The Token: A digital token is created on a network to represent a specific piece of information or an asset.
+- The Record: The token acts as the immutable record of ownership. It contains vital data about the artefact (metadata), ownership history, and rules for transfer, all secured by a network.
+
 
 # Registry API Message Format, identifiers and Descriptors
 
