@@ -99,6 +99,7 @@ Table of Contents
      6.2.  TAR Read
        6.2.1.  Call
        6.2.2.  Return result
+       6.2.3.  Error Message
      6.3.  TAR Update
        6.3.1.  Call
        6.3.2.  Return result
@@ -456,7 +457,9 @@ Table of Contents
      "_sdHashes": []
    }
 
-   ### Error Message TBD
+6.2.3.  Error Message
+
+   TBD
 
 6.3.  TAR Update
 
