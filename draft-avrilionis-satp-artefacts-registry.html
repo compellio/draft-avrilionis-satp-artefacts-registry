@@ -1703,38 +1703,40 @@ TBD<a href="#section-6.2.2-2" class="pilcrow">¶</a></p>
 * tarid REQUIRED: urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69<a href="#section-6.3.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.3.1-2.1">
-              <p id="section-6.3.1-2.1.1">tarBody REQUIRED:
-~~~json
-{
-"@context": "urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69",
-"owner": {
-  "ownerID": "urn:tar:eip155.137:d9D6916A0A65Fe2aC212243E8f2252143D0c7dE3"
-},
-"performance": {
-  "description": {
-    "en": "Triplicity band live performance"
-  },
-  "doorTime": "2024-11-16T21:00:00Z+02:00",
-  "location": "Poetry Bar",
-  "startTime": "2024-11-16T21:30:00Z+02:00",
-  "url": "https://poetry.bar/20241116/triplicity",
-  "venueID": "urn:tar:eip155.137:2C3a4C8a34404Ee0145f588536E94D47421dC891"
-},
-"price": {
-  "currency": "EUR",
-  "value": "10"
-},
-"seat": {
-  "seatLocation": "VIP",
-  "seatNumber": "A2"
-},
-"validity": {
-  "used": false
-}
-}
-~~~<a href="#section-6.3.1-2.1.1" class="pilcrow">¶</a></p>
+              <p id="section-6.3.1-2.1.1">tarBody REQUIRED:<a href="#section-6.3.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
+<div class="lang-json sourcecode" id="section-6.3.1-3">
+<pre>
+{
+  "@context": "urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69",
+  "owner": {
+    "ownerID": "urn:tar:eip155.137:d9D6916A0A65Fe2aC212243E8f2252143D0c7dE3"
+  },
+  "performance": {
+    "description": {
+      "en": "Triplicity band live performance"
+    },
+    "doorTime": "2024-11-16T21:00:00Z+02:00",
+    "location": "Poetry Bar",
+    "startTime": "2024-11-16T21:30:00Z+02:00",
+    "url": "https://poetry.bar/20241116/triplicity",
+    "venueID": "urn:tar:eip155.137:2C3a4C8a34404Ee0145f588536E94D47421dC891"
+  },
+  "price": {
+    "currency": "EUR",
+    "value": "10"
+  },
+  "seat": {
+    "seatLocation": "VIP",
+    "seatNumber": "A2"
+  },
+  "validity": {
+    "used": false
+  }
+}
+</pre><a href="#section-6.3.1-3" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="return-result-2">

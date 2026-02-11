@@ -468,19 +468,35 @@ Table of Contents
    REQUIRED:
    urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69
 
-   *  tarBody REQUIRED: ~~~json { "@context": "urn:tar:eip155.4444444445
-      00:81d0782847297956410ec1a674e60a78fff14b69", "owner": {
-      "ownerID":
-      "urn:tar:eip155.137:d9D6916A0A65Fe2aC212243E8f2252143D0c7dE3" },
-      "performance": { "description": { "en": "Triplicity band live
-      performance" }, "doorTime": "2024-11-16T21:00:00Z+02:00",
-      "location": "Poetry Bar", "startTime":
-      "2024-11-16T21:30:00Z+02:00", "url": "https://poetry.bar/20241116/
-      triplicity", "venueID":
-      "urn:tar:eip155.137:2C3a4C8a34404Ee0145f588536E94D47421dC891" },
-      "price": { "currency": "EUR", "value": "10" }, "seat": {
-      "seatLocation": "VIP", "seatNumber": "A2" }, "validity": { "used":
-      false } } ~~~
+   *  tarBody REQUIRED:
+
+   {
+     "@context": "urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69",
+     "owner": {
+       "ownerID": "urn:tar:eip155.137:d9D6916A0A65Fe2aC212243E8f2252143D0c7dE3"
+     },
+     "performance": {
+       "description": {
+         "en": "Triplicity band live performance"
+       },
+       "doorTime": "2024-11-16T21:00:00Z+02:00",
+       "location": "Poetry Bar",
+       "startTime": "2024-11-16T21:30:00Z+02:00",
+       "url": "https://poetry.bar/20241116/triplicity",
+       "venueID": "urn:tar:eip155.137:2C3a4C8a34404Ee0145f588536E94D47421dC891"
+     },
+     "price": {
+       "currency": "EUR",
+       "value": "10"
+     },
+     "seat": {
+       "seatLocation": "VIP",
+       "seatNumber": "A2"
+     },
+     "validity": {
+       "used": false
+     }
+   }
 
 6.3.2.  Return result
 
