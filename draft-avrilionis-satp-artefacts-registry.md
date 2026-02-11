@@ -325,7 +325,7 @@ This endpoint uses an HTTP POST method
 
 Here is an example representation in JSON format:
 
-```json
+~~~json
 {
   "@context": "urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69",
   "performance": {
@@ -353,7 +353,7 @@ Here is an example representation in JSON format:
     "used": false
   }
 }
-```
+~~~
 
 ### Return result
 
