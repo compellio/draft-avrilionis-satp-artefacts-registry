@@ -357,7 +357,7 @@ Here is an example representation in JSON format:
 
 ### Return result
 
-```json
+~~~json
 {
   "id": "urn:tar:eip155.444444444500:6850be85c8c264ef1562ebae547fd7086c281774",
   "receipt": "23f2769a-2cce-48f7-9612-4c3dd7a918b8",
@@ -391,7 +391,7 @@ Here is an example representation in JSON format:
   "checksum": "0xBA66E005328F45E1AE3CCE97F3404E4D4365D13443214CB968A49BB5948F98F3",
   "version": 1
 }
-```
+~~~
 
 ### Error Message
 TBD
@@ -408,7 +408,7 @@ The parameters of this message consist of the following:
 
 ### Return result
 
-```json
+~~~json
 {
   "id": "urn:tar:eip155.444444444500:6850be85c8c264ef1562ebae547fd7086c281774",
   "receipt": "23f2769a-2cce-48f7-9612-4c3dd7a918b8",
@@ -443,7 +443,7 @@ The parameters of this message consist of the following:
   "version": 1,
   "_sdHashes": []
 }
-```
+~~~
 ### Error Message
 TBD
 
@@ -457,7 +457,7 @@ The parameters of this message consist of the following:
 * tarid REQUIRED: urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69
 
 * tarBody REQUIRED:
-```json
+~~~json
 {
   "@context": "urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69",
   "owner": {
@@ -485,10 +485,10 @@ The parameters of this message consist of the following:
     "used": false
   }
 }
-```
+~~~
 
 ### Return result
-```json
+~~~json
 {
   "id": "urn:tar:eip155.444444444500:6850be85c8c264ef1562ebae547fd7086c281774",
   "receipt": "23f2769a-2cce-48f7-9612-4c3dd7a918b8",
@@ -523,7 +523,7 @@ The parameters of this message consist of the following:
   "version": 1,
   "_sdHashes": []
 }
-```
+~~~
 
 ### Error Message
 TBD
