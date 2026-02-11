@@ -117,6 +117,8 @@ informative:
 
   RFC9334: RFC9334
 
+  RFC8785: RFC8785
+
 normative:
   JWT: RFC7519
   JSON: RFC8259
@@ -135,7 +137,7 @@ normative:
 
 --- abstract
 
-This memo describes the Artefacts Registry for Asset Exchange API. The Registry is a component that exposes an API allowing gateways to fetch information related to the SAT protocol. Examples information stored in the Artefacts Registry are network identifiers, entities identifiers, asset profiles, or asset instances. Registries are are acting as persistent storage locations for records. Once registered, records cannot be removed.  New versions are appended in the Registry without removing previous versions (append-only principle).
+This memo describes the Artefacts Registry for Asset Exchange API. The Registry is a component that exposes an API allowing gateways to fetch information related to the SAT protocol. Examples information stored in the Artefacts Registry are network identifiers, entities identifiers, asset profiles, or asset instances. Registries are are acting as persistent storage locations for records. Once registered, records can be updated in an append-only manner.
 
 --- middle
 
@@ -143,9 +145,9 @@ This memo describes the Artefacts Registry for Asset Exchange API. The Registry 
 
 {: #introduction-doc}
 
-This memo proposes an API intended to be implemented by Registries in the context of SATP. The Registry is a component that exposes an API allowing gateways to fetch artefacts related to the SAT protocol. Examples of SATP artefacts are network identifiers, entities identifiers, asset profiles, or asset instances.
+This memo proposes an API intended to be implemented by Artefact Registries in the context of SATP. A Registry is a component that exposes an API allowing gateways to fetch artefacts related to the SAT protocol ("API3"). Examples of SATP artefacts are network identifiers, entities identifiers, asset profiles, or asset instances.
 
-Registries play an important role in maintaining record of artefacts that are important during the Setup Stage of SATP (a.k.a “Stage 0”). Registries are are acting as persistent storage locations for such artefacts. once registered, artefacts cannot be removed. New versions are appended in the Registry without removing previous versions (append-only principle). Readers are directed first to {{REGARCH}} for a description of the architecture underlying the Registries.
+Registries play an important role in maintaining record of artefacts that are important during the Setup Stage of SATP (a.k.a “Stage 0”). Registries are are acting as persistent storage locations for such artefacts. Once registered, artefacts cannot be removed. New versions are appended in the Registry without removing previous versions (append-only principle). Readers are directed first to {{REGARCH}} for a description of the architecture underlying the Registries.
 
 All API calls are assumed to run over TLS1.2 or higher, and the endpoints of the registry are associated with a certificate indicating the legal owner (or operator) of the Registry. HTTPS must be used instead of plain HTTP.
 
@@ -188,9 +190,9 @@ The Registry API pertains to the interaction between gateways. In {{ARCH}} such 
       |        V                    |
       |      +---+----------+       |
       |      |   |          |       |
-      |      |   | Registry |       |
-      |      |API|    R1    |       |
-      |      |(3)|          |       |
+      |      |API| Registry |       |
+      |      |(3)|    R1    |       |
+      |      |   |          |       |
       |      +---+----------+       V
       |        ^               +---------+
       V        |               |   API1  |
@@ -211,7 +213,7 @@ The Registry API pertains to the interaction between gateways. In {{ARCH}} such 
 
 The three stages of the SATP protocol are described in {{CORE}}. Prior to the initiation of SATP the peer gateways may access artefacts related to networks, assets or the gateway themselves. Registries are used to maintain record of such artefacts. Registries are of particular importance in the interactions between the peer gateways during the setup stage (Stage-0) {{STAGE0}}
 
-Records stored in a registry are persisted in the form of Tokenized Artefacts. In summary the main concepts of a Tokenized Arefact Record are as follows:
+Records stored in a registry are persisted in the form of Tokenized Artefacts Record (TAR). In summary the main concepts of a TAR are as follows:
 
 - The Artefact: This is a piece of information containing digitized data or pointing to assets. It can range from configuration data, execution log, network identifier, as well as any form of tangible or intangible asset, such as real estate, art, company shares, or even intellectual property.
 
@@ -293,10 +295,10 @@ The mechanisms to establish the registry identifier or the operator identifier i
 
 This is a JSON list of digital signature algorithms supported by a registry. Each entry in the list should be either an Algorithm Name value registered in the IANA "JSON Web Signature and Encryption Algorithms" registry established by {{JWA}} or be a value that contains a Collision-Resistant Name.
 
-All implementations MUST support a common default of "ES256", which is the ECDSA signature algorithm with the P-256 curve and the SHA-256 hash function.
+All implementations must support a common default of "ES256", which is the ECDSA signature algorithm with the P-256 curve and the SHA-256 hash function.
 
 ### JSON Canonicalisation
-TBD
+Registries must suport JSON Canonicalization [RFC8785].
 
 
 # Overview of API endpoints
@@ -392,13 +394,155 @@ Here is an example representation in JSON format:
 ```
 
 ### Error Message
+TBD
+
+## TAR Read
+{: #READ-TAR}
+This endpoint retrieves a TAR previously created or updated in the Registry. 
+
+### Call
+
+The parameters of this message consist of the following:
+* tarid REQUIRED: urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69
+
+
+### Return result
+
+```json
+{
+  "id": "urn:tar:eip155.444444444500:6850be85c8c264ef1562ebae547fd7086c281774",
+  "receipt": "23f2769a-2cce-48f7-9612-4c3dd7a918b8",
+  "data": {
+    "@context": "urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69",
+    "owner": {
+      "ownerID": "urn:tar:eip155.137:d9D6916A0A65Fe2aC212243E8f2252143D0c7dE4"
+    },
+    "performance": {
+      "description": {
+        "en": "Triplicity band live performance"
+      },
+      "doorTime": "2024-11-16T21:00:00Z+02:00",
+      "location": "Poetry Bar",
+      "startTime": "2024-11-16T21:30:00Z+02:00",
+      "url": "https://poetry.bar/20241116/triplicity",
+      "venueID": "urn:tar:eip155.137:2C3a4C8a34404Ee0145f588536E94D47421dC891"
+    },
+    "price": {
+      "currency": "EUR",
+      "value": "10"
+    },
+    "seat": {
+      "seatLocation": "VIP",
+      "seatNumber": "A1"
+    },
+    "validity": {
+      "used": false
+    }
+  },
+  "checksum": "0xBA66E005328F45E1AE3CCE97F3404E4D4365D13443214CB968A49BB5948F98F3",
+  "version": 1,
+  "_sdHashes": []
+}
+```
+### Error Message
+TBD
 
 
 ## TAR Update
+{: #UPDATE-TAR}
+Updates the TAR by registering a new version for the specific TARID  
 
-## TAR Read
+### Call
+The parameters of this message consist of the following:
+* tarid REQUIRED: urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69
+
+* tarBody REQUIRED:
+```json
+{
+  "@context": "urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69",
+  "owner": {
+    "ownerID": "urn:tar:eip155.137:d9D6916A0A65Fe2aC212243E8f2252143D0c7dE3"
+  },
+  "performance": {
+    "description": {
+      "en": "Triplicity band live performance"
+    },
+    "doorTime": "2024-11-16T21:00:00Z+02:00",
+    "location": "Poetry Bar",
+    "startTime": "2024-11-16T21:30:00Z+02:00",
+    "url": "https://poetry.bar/20241116/triplicity",
+    "venueID": "urn:tar:eip155.137:2C3a4C8a34404Ee0145f588536E94D47421dC891"
+  },
+  "price": {
+    "currency": "EUR",
+    "value": "10"
+  },
+  "seat": {
+    "seatLocation": "VIP",
+    "seatNumber": "A2"
+  },
+  "validity": {
+    "used": false
+  }
+}
+```
+
+### Return result
+```json
+{
+  "id": "urn:tar:eip155.444444444500:6850be85c8c264ef1562ebae547fd7086c281774",
+  "receipt": "23f2769a-2cce-48f7-9612-4c3dd7a918b8",
+  "data": {
+    "@context": "urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69",
+    "owner": {
+      "ownerID": "urn:tar:eip155.137:d9D6916A0A65Fe2aC212243E8f2252143D0c7dE4"
+    },
+    "performance": {
+      "description": {
+        "en": "Triplicity band live performance"
+      },
+      "doorTime": "2024-11-16T21:00:00Z+02:00",
+      "location": "Poetry Bar",
+      "startTime": "2024-11-16T21:30:00Z+02:00",
+      "url": "https://poetry.bar/20241116/triplicity",
+      "venueID": "urn:tar:eip155.137:2C3a4C8a34404Ee0145f588536E94D47421dC891"
+    },
+    "price": {
+      "currency": "EUR",
+      "value": "10"
+    },
+    "seat": {
+      "seatLocation": "VIP",
+      "seatNumber": "A1"
+    },
+    "validity": {
+      "used": false
+    }
+  },
+  "checksum": "0xBA66E005328F45E1AE3CCE97F3404E4D4365D13443214CB968A49BB5948F98F3",
+  "version": 1,
+  "_sdHashes": []
+}
+```
+
+### Error Message
+TBD
+
+
 
 ## TAR Deletion
+{: #DELETE-TAR}
+Archives the TAR
+
+### Call
+The parameters of this message consist of the following:
+* tarid REQUIRED: urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69
+
+### Return result
+A success code
+
+### Error Message
+TBD
 
 
 
@@ -408,87 +552,11 @@ Here is an example representation in JSON format:
 
 {: #satp-iana-Consideration}
 
-
-The following request is being made to IANA.
+The `tar` namespace might follow a hierachichal structure under the general URN `satp` namespace, i.e. `urn:satp:tar`.
 
 ## Registry API Error Codes
 
-This registry defines the error codes used in SATP protocol messages. Each entry consists of:
-
-- **Code**: The enumeration string (e.g., err_3.3.1)
-- **Category**: The protocol stage or message type (e.g., Commit Ready errors)
-- **Type**: The error type (e.g., badly formed message)
-- **Description**: A brief description (e.g., mismatch transferContextId)
-
-| Code         | Category                        | Type                  | Description                        |
-|--------------|----------------------------------|-----------------------|-------------------------------------|
-| err_1.1.1    | Transfer Proposal/Receipt errors | badly formed message  | invalid transferContextId           |
-| err_1.1.2    | Transfer Proposal/Receipt errors | badly formed message  | invalid sessionId                   |
-| err_1.1.3    | Transfer Proposal/Receipt errors | badly formed message  | incorect transferInitClaimFormat    |
-| err_1.1.4    | Transfer Proposal/Receipt errors | badly formed message  | bad signature                       |
-| err_1.1.11   | Transfer Proposal/Receipt errors | badly formed claim    | invalid digitalAssetId              |
-| err_1.1.12   | Transfer Proposal/Receipt errors | badly formed claim    | invalid assetProfileId              |
-| err_1.1.13   | Transfer Proposal/Receipt errors | badly formed claim    | invalid verifiedOriginatorEntityId  |
-| err_1.1.14   | Transfer Proposal/Receipt errors | badly formed claim    | invalid verifiedBeneficiaryEntityId |
-| err_1.1.15   | Transfer Proposal/Receipt errors | badly formed claim    | invalid originatorPubkey            |
-| err_1.1.16   | Transfer Proposal/Receipt errors | badly formed claim    | invalid beneficiaryPubkey           |
-| err_1.1.17   | Transfer Proposal/Receipt errors | badly formed claim    | invalid senderGatewaySignaturePublicKey |
-| err_1.1.18   | Transfer Proposal/Receipt errors | badly formed claim    | invalid receiverGatewaySignaturePublicKey |
-| err_1.1.19   | Transfer Proposal/Receipt errors | badly formed claim    | invalid senderGatewayId             |
-| err_1.1.20   | Transfer Proposal/Receipt errors | badly formed claim    | invalid recipientGatewayId          |
-| err_1.1.31   | Transfer Proposal/Receipt errors | badly formed parameter| unsupported gatewayDefaultSignatureAlgorithm |
-| err_1.1.32   | Transfer Proposal/Receipt errors | badly formed parameter| unsupported networkLockType         |
-| err_1.1.33   | Transfer Proposal/Receipt errors | badly formed parameter| unsupported networkLockExpirationTime |
-| err_1.1.34   | Transfer Proposal/Receipt errors | badly formed parameter| unsupported gatewayTlsScheme        |
-| err_1.1.35   | Transfer Proposal/Receipt errors | badly formed parameter| unsupported gatewayLoggingProfile   |
-| err_1.1.36   | Transfer Proposal/Receipt errors | badly formed parameter| unsupported gatewayAccessControlProfile |
-| err_1.2.1    | Transfer Proposal/Receipt errors | badly formed message  | mismatch transferContextId          |
-| err_1.2.2    | Transfer Proposal/Receipt errors | badly formed message  | mismatch sessionId                  |
-| err_1.2.3    | Transfer Proposal/Receipt errors | badly formed message  | mismatch hashTransferInitClaim      |
-| err_1.2.4    | Transfer Proposal/Receipt errors | badly formed message  | bad signature                       |
-| err_1.3.1    | Transfer Commence errors         | badly formed message  | mismatch transferContextId          |
-| err_1.3.2    | Transfer Commence errors         | badly formed message  | mismatch sessionId                  |
-| err_1.3.3    | Transfer Commence errors         | badly formed message  | mismatch hashTransferInitClaim      |
-| err_1.3.4    | Transfer Commence errors         | badly formed message  | mismatch hashPrevMessage            |
-| err_1.3.5    | Transfer Commence errors         | badly formed message  | bad signature                       |
-| err_1.4.1    | ACK Commence errors              | badly formed message  | mismatch transferContextId          |
-| err_1.4.2    | ACK Commence errors              | badly formed message  | mismatch sessionId                  |
-| err_1.4.3    | ACK Commence errors              | badly formed message  | mismatch hashPrevMessage            |
-| err_1.4.4    | ACK Commence errors              | badly formed message  | bad signature                       |
-| err_2.2.1    | Lock Assertion errors            | badly formed message  | mismatch transferContextId          |
-| err_2.2.2    | Lock Assertion errors            | badly formed message  | mismatch sessionId                  |
-| err_2.2.3    | Lock Assertion errors            | badly formed message  | unsupported lockAssertionClaimFormat|
-| err_2.2.4    | Lock Assertion errors            | badly formed message  | unsupported lockAssertionExpiration |
-| err_2.2.5    | Lock Assertion errors            | badly formed message  | mismatch hashPrevMessage            |
-| err_2.2.6    | Lock Assertion errors            | badly formed message  | bad signature                       |
-| err_2.4.1    | Lock Assertion Receipt errors    | badly formed message  | mismatch transferContextId          |
-| err_2.4.2    | Lock Assertion Receipt errors    | badly formed message  | mismatch sessionId                  |
-| err_2.4.3    | Lock Assertion Receipt errors    | badly formed message  | mismatch hashPrevMessage            |
-| err_2.4.4    | Lock Assertion Receipt errors    | badly formed message  | bad signature                       |
-| err_3.1.1    | Commit Preparation errors        | badly formed message  | mismatch transferContextId          |
-| err_3.1.2    | Commit Preparation errors        | badly formed message  | mismatch sessionId                  |
-| err_3.1.3    | Commit Preparation errors        | badly formed message  | mismatch hashPrevMessage            |
-| err_3.1.4    | Commit Preparation errors        | badly formed message  | bad signature                       |
-| err_3.3.1    | Commit Ready errors              | badly formed message  | mismatch transferContextId          |
-| err_3.3.2    | Commit Ready errors              | badly formed message  | mismatch sessionId                  |
-| err_3.3.3    | Commit Ready errors              | badly formed message  | mismatch hashPrevMessage            |
-| err_3.3.4    | Commit Ready errors              | badly formed message  | unsupported mintAssertionFormat     |
-| err_3.3.5    | Commit Ready errors              | badly formed message  | bad signature                       |
-| err_3.5.1    | Commit Final Assertion errors    | badly formed message  | mismatch transferContextId          |
-| err_3.5.2    | Commit Final Assertion errors    | badly formed message  | mismatch sessionId                  |
-| err_3.5.3    | Commit Final Assertion errors    | badly formed message  | mismatch hashPrevMessage            |
-| err_3.5.4    | Commit Final Assertion errors    | badly formed message  | unsupported burnAssertionClaimFormat|
-| err_3.5.5    | Commit Final Assertion errors    | badly formed message  | bad signature                       |
-| err_3.7.1    | Commit Final Ack Receipt errors  | badly formed message  | mismatch transferContextId          |
-| err_3.7.2    | Commit Final Ack Receipt errors  | badly formed message  | mismatch sessionId                  |
-| err_3.7.3    | Commit Final Ack Receipt errors  | badly formed message  | mismatch hashPrevMessage            |
-| err_3.7.4    | Commit Final Ack Receipt errors  | badly formed message  | unsupported assignmentAssertionClaimFormat |
-| err_3.7.5    | Commit Final Ack Receipt errors  | badly formed message  | bad signature                       |
-| err_3.9.1    | Transfer Complete errors         | badly formed message  | mismatch transferContextId          |
-| err_3.9.2    | Transfer Complete errors         | badly formed message  | mismatch sessionId                  |
-| err_3.9.3    | Transfer Complete errors         | badly formed message  | mismatch hashPrevMessage            |
-| err_3.9.4    | Transfer Complete errors         | badly formed message  | mismatch hashTransferCommence       |
-| err_3.9.5    | Transfer Complete errors         | badly formed message  | bad signature                       |
+TBD
 
 ## URN Registration
 
@@ -508,23 +576,7 @@ This appendix defines the error codes that may be returned in SATP protocol mess
 
 ## Protocol Error Codes
 
-The following error codes are defined for SATP protocol errors:
-
-- err_1.1: Invalid message type
-- err_1.2: Invalid session ID
-- err_1.3: Invalid transfer context ID
-- err_1.4: Invalid signature
-- err_1.5: Invalid hash value
-- err_2.1: Asset not found
-- err_2.2: Asset already locked
-- err_2.3: Asset lock expired
-- err_2.4: Insufficient permissions
-- err_3.1: Network connection failure
-- err_3.2: Gateway unavailable
-- err_3.3: Timeout exceeded
-- err_4.1: Unsupported credential scheme
-- err_4.2: Invalid credential format
-- err_4.3: Credential verification failed
+TBD
 
 # Acknowledgements
 
@@ -532,14 +584,4 @@ The following error codes are defined for SATP protocol errors:
 
 The authors would like to thank the following people for their input and support:
 
-Andre Augusto,
-Rafael Belchior,
-Alexandru Chiriac,
-Claire Facer,
-Martin Gfeller,
-Wes Hardaker,
-David Millman,
-Luke Riley,
-John Robotham,
-Orie Steele,
-Weijia Zhang.
+Andre, Rafael, Rama.
