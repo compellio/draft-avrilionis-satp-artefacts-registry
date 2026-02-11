@@ -398,7 +398,7 @@ TBD
 
 ## TAR Read
 {: #READ-TAR}
-This endpoint retrieves a TAR previously created or updated in the Registry. 
+This endpoint retrieves a TAR previously created or updated in the Registry.
 
 ### Call
 
@@ -450,7 +450,7 @@ TBD
 
 ## TAR Update
 {: #UPDATE-TAR}
-Updates the TAR by registering a new version for the specific TARID  
+Updates the TAR by registering a new version for the specific TARID
 
 ### Call
 The parameters of this message consist of the following:
