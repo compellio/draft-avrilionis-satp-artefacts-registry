@@ -457,7 +457,7 @@ The parameters of this message consist of the following:
 * tarid REQUIRED: urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69
 
 * tarBody REQUIRED:
-  
+
 ~~~json
 {
   "@context": "urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69",
