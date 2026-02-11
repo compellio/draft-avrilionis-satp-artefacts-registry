@@ -8,7 +8,7 @@
 <meta content="Denis Avrilionis" name="author">
 <meta content="Thomas Hardjono" name="author">
 <meta content="
-       This memo describes the Artefacts Registry for Asset Exchange API. The Registry is a component that exposes an API allowing gateways to fetch information related to the SAT protocol. Examples information stored in the Artefacts Registry are network identifiers, entities identifiers, asset profiles, or asset instances. Registries are are acting as persistent storage locations for records. Once registered, records cannot be removed.  New versions are appended in the Registry without removing previous versions (append-only principle). 
+       This memo describes the Artefacts Registry for Asset Exchange API. The Registry is a component that exposes an API allowing gateways to fetch information related to the SAT protocol. Examples information stored in the Artefacts Registry are network identifiers, entities identifiers, asset profiles, or asset instances. Registries are are acting as persistent storage locations for records. Once registered, records can be updated in an append-only manner. 
     " name="description">
 <meta content="xml2rfc 3.31.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
@@ -1049,7 +1049,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Avrilionis &amp; Hardjono</td>
-<td class="center">Expires 8 August 2026</td>
+<td class="center">Expires 15 August 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1062,12 +1062,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-avrilionis-satp-artefacts-registry-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-02-04" class="published">4 February 2026</time>
+<time datetime="2026-02-11" class="published">11 February 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-08-08">8 August 2026</time></dd>
+<dd class="expires"><time datetime="2026-08-15">15 August 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1084,7 +1084,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Artefacts Registry</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This memo describes the Artefacts Registry for Asset Exchange API. The Registry is a component that exposes an API allowing gateways to fetch information related to the SAT protocol. Examples information stored in the Artefacts Registry are network identifiers, entities identifiers, asset profiles, or asset instances. Registries are are acting as persistent storage locations for records. Once registered, records cannot be removed.  New versions are appended in the Registry without removing previous versions (append-only principle).<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This memo describes the Artefacts Registry for Asset Exchange API. The Registry is a component that exposes an API allowing gateways to fetch information related to the SAT protocol. Examples information stored in the Artefacts Registry are network identifiers, entities identifiers, asset profiles, or asset instances. Registries are are acting as persistent storage locations for records. Once registered, records can be updated in an append-only manner.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1121,7 +1121,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 8 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 15 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1225,13 +1225,43 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
-                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-tar-update" class="internal xref">TAR Update</a></p>
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-tar-read" class="internal xref">TAR Read</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.1">
+                    <p id="section-toc.1-1.6.2.2.2.1.1"><a href="#section-6.2.1" class="auto internal xref">6.2.1</a>.  <a href="#name-call-2" class="internal xref">Call</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.2">
+                    <p id="section-toc.1-1.6.2.2.2.2.1"><a href="#section-6.2.2" class="auto internal xref">6.2.2</a>.  <a href="#name-return-result-2" class="internal xref">Return result</a></p>
+</li>
+                </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
-                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-tar-read" class="internal xref">TAR Read</a></p>
+                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-tar-update" class="internal xref">TAR Update</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.1">
+                    <p id="section-toc.1-1.6.2.3.2.1.1"><a href="#section-6.3.1" class="auto internal xref">6.3.1</a>.  <a href="#name-call-3" class="internal xref">Call</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.2">
+                    <p id="section-toc.1-1.6.2.3.2.2.1"><a href="#section-6.3.2" class="auto internal xref">6.3.2</a>.  <a href="#name-return-result-3" class="internal xref">Return result</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.3">
+                    <p id="section-toc.1-1.6.2.3.2.3.1"><a href="#section-6.3.3" class="auto internal xref">6.3.3</a>.  <a href="#name-error-message-2" class="internal xref">Error Message</a></p>
+</li>
+                </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.4">
                 <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="auto internal xref">6.4</a>.  <a href="#name-tar-deletion" class="internal xref">TAR Deletion</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.4.2.1">
+                    <p id="section-toc.1-1.6.2.4.2.1.1"><a href="#section-6.4.1" class="auto internal xref">6.4.1</a>.  <a href="#name-call-4" class="internal xref">Call</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.4.2.2">
+                    <p id="section-toc.1-1.6.2.4.2.2.1"><a href="#section-6.4.2" class="auto internal xref">6.4.2</a>.  <a href="#name-return-result-4" class="internal xref">Return result</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.4.2.3">
+                    <p id="section-toc.1-1.6.2.4.2.3.1"><a href="#section-6.4.3" class="auto internal xref">6.4.3</a>.  <a href="#name-error-message-3" class="internal xref">Error Message</a></p>
+</li>
+                </ul>
 </li>
             </ul>
 </li>
@@ -1281,9 +1311,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <div id="introduction-doc">
-<p id="section-1-1">This memo proposes an API intended to be implemented by Registries in the context of SATP. The Registry is a component that exposes an API allowing gateways to fetch artefacts related to the SAT protocol. Examples of SATP artefacts are network identifiers, entities identifiers, asset profiles, or asset instances.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">This memo proposes an API intended to be implemented by Artefact Registries in the context of SATP. A Registry is a component that exposes an API allowing gateways to fetch artefacts related to the SAT protocol ("API3"). Examples of SATP artefacts are network identifiers, entities identifiers, asset profiles, or asset instances.<a href="#section-1-1" class="pilcrow">¶</a></p>
 </div>
-<p id="section-1-2">Registries play an important role in maintaining record of artefacts that are important during the Setup Stage of SATP (a.k.a “Stage 0”). Registries are are acting as persistent storage locations for such artefacts. once registered, artefacts cannot be removed. New versions are appended in the Registry without removing previous versions (append-only principle). Readers are directed first to <span>[<a href="#REGARCH" class="cite xref">REGARCH</a>]</span> for a description of the architecture underlying the Registries.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-2">Registries play an important role in maintaining record of artefacts that are important during the Setup Stage of SATP (a.k.a “Stage 0”). Registries are are acting as persistent storage locations for such artefacts. Once registered, artefacts cannot be removed. New versions are appended in the Registry without removing previous versions (append-only principle). Readers are directed first to <span>[<a href="#REGARCH" class="cite xref">REGARCH</a>]</span> for a description of the architecture underlying the Registries.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">All API calls are assumed to run over TLS1.2 or higher, and the endpoints of the registry are associated with a certificate indicating the legal owner (or operator) of the Registry. HTTPS must be used instead of plain HTTP.<a href="#section-1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1336,9 +1366,9 @@ interpreted as carrying significance described in RFC 2119.<a href="#section-2-2
       |        V                    |
       |      +---+----------+       |
       |      |   |          |       |
-      |      |   | Registry |       |
-      |      |API|    R1    |       |
-      |      |(3)|          |       |
+      |      |API| Registry |       |
+      |      |(3)|    R1    |       |
+      |      |   |          |       |
       |      +---+----------+       V
       |        ^               +---------+
       V        |               |   API1  |
@@ -1362,7 +1392,7 @@ interpreted as carrying significance described in RFC 2119.<a href="#section-2-2
 <div id="registry-role">
 <p id="section-4.2-1">The three stages of the SATP protocol are described in <span>[<a href="#CORE" class="cite xref">CORE</a>]</span>. Prior to the initiation of SATP the peer gateways may access artefacts related to networks, assets or the gateway themselves. Registries are used to maintain record of such artefacts. Registries are of particular importance in the interactions between the peer gateways during the setup stage (Stage-0) <span>[<a href="#STAGE0" class="cite xref">STAGE0</a>]</span><a href="#section-4.2-1" class="pilcrow">¶</a></p>
 </div>
-<p id="section-4.2-2">Records stored in a registry are persisted in the form of Tokenized Artefacts. In summary the main concepts of a Tokenized Arefact Record are as follows:<a href="#section-4.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.2-2">Records stored in a registry are persisted in the form of Tokenized Artefacts Record (TAR). In summary the main concepts of a TAR are as follows:<a href="#section-4.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.2-3.1">
             <p id="section-4.2-3.1.1">The Artefact: This is a piece of information containing digitized data or pointing to assets. It can range from configuration data, execution log, network identifier, as well as any form of tangible or intangible asset, such as real estate, art, company shares, or even intellectual property.<a href="#section-4.2-3.1.1" class="pilcrow">¶</a></p>
@@ -1468,7 +1498,7 @@ interpreted as carrying significance described in RFC 2119.<a href="#section-2-2
 <a href="#section-5.3.6" class="section-number selfRef">5.3.6. </a><a href="#name-signature-algorithms-suppor" class="section-name selfRef">Signature Algorithms Supported</a>
           </h4>
 <p id="section-5.3.6-1">This is a JSON list of digital signature algorithms supported by a registry. Each entry in the list should be either an Algorithm Name value registered in the IANA "JSON Web Signature and Encryption Algorithms" registry established by <span>[<a href="#JWA" class="cite xref">JWA</a>]</span> or be a value that contains a Collision-Resistant Name.<a href="#section-5.3.6-1" class="pilcrow">¶</a></p>
-<p id="section-5.3.6-2">All implementations MUST support a common default of "ES256", which is the ECDSA signature algorithm with the P-256 curve and the SHA-256 hash function.<a href="#section-5.3.6-2" class="pilcrow">¶</a></p>
+<p id="section-5.3.6-2">All implementations must support a common default of "ES256", which is the ECDSA signature algorithm with the P-256 curve and the SHA-256 hash function.<a href="#section-5.3.6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="json-canonicalisation">
@@ -1476,7 +1506,7 @@ interpreted as carrying significance described in RFC 2119.<a href="#section-2-2
           <h4 id="name-json-canonicalisation">
 <a href="#section-5.3.7" class="section-number selfRef">5.3.7. </a><a href="#name-json-canonicalisation" class="section-name selfRef">JSON Canonicalisation</a>
           </h4>
-<p id="section-5.3.7-1">TBD<a href="#section-5.3.7-1" class="pilcrow">¶</a></p>
+<p id="section-5.3.7-1">Registries must suport JSON Canonicalization <span>[<a href="#RFC8785" class="cite xref">RFC8785</a>]</span>.<a href="#section-5.3.7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1584,30 +1614,207 @@ interpreted as carrying significance described in RFC 2119.<a href="#section-2-2
 <section id="section-6.1.3">
           <h4 id="name-error-message">
 <a href="#section-6.1.3" class="section-number selfRef">6.1.3. </a><a href="#name-error-message" class="section-name selfRef">Error Message</a>
-        </h4>
+          </h4>
+<p id="section-6.1.3-1">TBD<a href="#section-6.1.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
-<div id="tar-update">
+<div id="READ-TAR">
 <section id="section-6.2">
-        <h3 id="name-tar-update">
-<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-tar-update" class="section-name selfRef">TAR Update</a>
-      </h3>
-</section>
-</div>
-<div id="tar-read">
-<section id="section-6.3">
         <h3 id="name-tar-read">
-<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-tar-read" class="section-name selfRef">TAR Read</a>
-      </h3>
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-tar-read" class="section-name selfRef">TAR Read</a>
+        </h3>
+<p id="section-6.2-1">This endpoint retrieves a TAR previously created or updated in the Registry.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<div id="call">
+<section id="section-6.2.1">
+          <h4 id="name-call-2">
+<a href="#section-6.2.1" class="section-number selfRef">6.2.1. </a><a href="#name-call-2" class="section-name selfRef">Call</a>
+          </h4>
+<p id="section-6.2.1-1">The parameters of this message consist of the following:
+* tarid REQUIRED: urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69<a href="#section-6.2.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="tar-deletion">
+<div id="return-result-1">
+<section id="section-6.2.2">
+          <h4 id="name-return-result-2">
+<a href="#section-6.2.2" class="section-number selfRef">6.2.2. </a><a href="#name-return-result-2" class="section-name selfRef">Return result</a>
+          </h4>
+<p id="section-6.2.2-1"><code>json
+{
+  "id": "urn:tar:eip155.444444444500:6850be85c8c264ef1562ebae547fd7086c281774",
+  "receipt": "23f2769a-2cce-48f7-9612-4c3dd7a918b8",
+  "data": {
+    "@context": "urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69",
+    "owner": {
+      "ownerID": "urn:tar:eip155.137:d9D6916A0A65Fe2aC212243E8f2252143D0c7dE4"
+    },
+    "performance": {
+      "description": {
+        "en": "Triplicity band live performance"
+      },
+      "doorTime": "2024-11-16T21:00:00Z+02:00",
+      "location": "Poetry Bar",
+      "startTime": "2024-11-16T21:30:00Z+02:00",
+      "url": "https://poetry.bar/20241116/triplicity",
+      "venueID": "urn:tar:eip155.137:2C3a4C8a34404Ee0145f588536E94D47421dC891"
+    },
+    "price": {
+      "currency": "EUR",
+      "value": "10"
+    },
+    "seat": {
+      "seatLocation": "VIP",
+      "seatNumber": "A1"
+    },
+    "validity": {
+      "used": false
+    }
+  },
+  "checksum": "0xBA66E005328F45E1AE3CCE97F3404E4D4365D13443214CB968A49BB5948F98F3",
+  "version": 1,
+  "_sdHashes": []
+}
+</code>
+### Error Message
+TBD<a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="UPDATE-TAR">
+<section id="section-6.3">
+        <h3 id="name-tar-update">
+<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-tar-update" class="section-name selfRef">TAR Update</a>
+        </h3>
+<p id="section-6.3-1">Updates the TAR by registering a new version for the specific TARID<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<div id="call-1">
+<section id="section-6.3.1">
+          <h4 id="name-call-3">
+<a href="#section-6.3.1" class="section-number selfRef">6.3.1. </a><a href="#name-call-3" class="section-name selfRef">Call</a>
+          </h4>
+<p id="section-6.3.1-1">The parameters of this message consist of the following:
+* tarid REQUIRED: urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69<a href="#section-6.3.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.3.1-2.1">
+              <p id="section-6.3.1-2.1.1">tarBody REQUIRED:
+<code>json
+{
+"@context": "urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69",
+"owner": {
+  "ownerID": "urn:tar:eip155.137:d9D6916A0A65Fe2aC212243E8f2252143D0c7dE3"
+},
+"performance": {
+  "description": {
+    "en": "Triplicity band live performance"
+  },
+  "doorTime": "2024-11-16T21:00:00Z+02:00",
+  "location": "Poetry Bar",
+  "startTime": "2024-11-16T21:30:00Z+02:00",
+  "url": "https://poetry.bar/20241116/triplicity",
+  "venueID": "urn:tar:eip155.137:2C3a4C8a34404Ee0145f588536E94D47421dC891"
+},
+"price": {
+  "currency": "EUR",
+  "value": "10"
+},
+"seat": {
+  "seatLocation": "VIP",
+  "seatNumber": "A2"
+},
+"validity": {
+  "used": false
+}
+}
+</code><a href="#section-6.3.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="return-result-2">
+<section id="section-6.3.2">
+          <h4 id="name-return-result-3">
+<a href="#section-6.3.2" class="section-number selfRef">6.3.2. </a><a href="#name-return-result-3" class="section-name selfRef">Return result</a>
+          </h4>
+<p id="section-6.3.2-1"><code>json
+{
+  "id": "urn:tar:eip155.444444444500:6850be85c8c264ef1562ebae547fd7086c281774",
+  "receipt": "23f2769a-2cce-48f7-9612-4c3dd7a918b8",
+  "data": {
+    "@context": "urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69",
+    "owner": {
+      "ownerID": "urn:tar:eip155.137:d9D6916A0A65Fe2aC212243E8f2252143D0c7dE4"
+    },
+    "performance": {
+      "description": {
+        "en": "Triplicity band live performance"
+      },
+      "doorTime": "2024-11-16T21:00:00Z+02:00",
+      "location": "Poetry Bar",
+      "startTime": "2024-11-16T21:30:00Z+02:00",
+      "url": "https://poetry.bar/20241116/triplicity",
+      "venueID": "urn:tar:eip155.137:2C3a4C8a34404Ee0145f588536E94D47421dC891"
+    },
+    "price": {
+      "currency": "EUR",
+      "value": "10"
+    },
+    "seat": {
+      "seatLocation": "VIP",
+      "seatNumber": "A1"
+    },
+    "validity": {
+      "used": false
+    }
+  },
+  "checksum": "0xBA66E005328F45E1AE3CCE97F3404E4D4365D13443214CB968A49BB5948F98F3",
+  "version": 1,
+  "_sdHashes": []
+}
+</code><a href="#section-6.3.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="error-message-1">
+<section id="section-6.3.3">
+          <h4 id="name-error-message-2">
+<a href="#section-6.3.3" class="section-number selfRef">6.3.3. </a><a href="#name-error-message-2" class="section-name selfRef">Error Message</a>
+          </h4>
+<p id="section-6.3.3-1">TBD<a href="#section-6.3.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="DELETE-TAR">
 <section id="section-6.4">
         <h3 id="name-tar-deletion">
 <a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-tar-deletion" class="section-name selfRef">TAR Deletion</a>
-      </h3>
+        </h3>
+<p id="section-6.4-1">Archives the TAR<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+<div id="call-2">
+<section id="section-6.4.1">
+          <h4 id="name-call-4">
+<a href="#section-6.4.1" class="section-number selfRef">6.4.1. </a><a href="#name-call-4" class="section-name selfRef">Call</a>
+          </h4>
+<p id="section-6.4.1-1">The parameters of this message consist of the following:
+* tarid REQUIRED: urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69<a href="#section-6.4.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="return-result-3">
+<section id="section-6.4.2">
+          <h4 id="name-return-result-4">
+<a href="#section-6.4.2" class="section-number selfRef">6.4.2. </a><a href="#name-return-result-4" class="section-name selfRef">Return result</a>
+          </h4>
+<p id="section-6.4.2-1">A success code<a href="#section-6.4.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="error-message-2">
+<section id="section-6.4.3">
+          <h4 id="name-error-message-3">
+<a href="#section-6.4.3" class="section-number selfRef">6.4.3. </a><a href="#name-error-message-3" class="section-name selfRef">Error Message</a>
+          </h4>
+<p id="section-6.4.3-1">TBD<a href="#section-6.4.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 </section>
@@ -1618,443 +1825,14 @@ interpreted as carrying significance described in RFC 2119.<a href="#section-2-2
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-iana-consideration" class="section-name selfRef">IANA Consideration</a>
       </h2>
 <div id="satp-iana-Consideration">
-<p id="section-7-1">The following request is being made to IANA.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">The <code>tar</code> namespace might follow a hierachichal structure under the general URN <code>satp</code> namespace, i.e. <code>urn:satp:tar</code>.<a href="#section-7-1" class="pilcrow">¶</a></p>
 </div>
 <div id="registry-api-error-codes">
 <section id="section-7.1">
         <h3 id="name-registry-api-error-codes">
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-registry-api-error-codes" class="section-name selfRef">Registry API Error Codes</a>
         </h3>
-<p id="section-7.1-1">This registry defines the error codes used in SATP protocol messages. Each entry consists of:<a href="#section-7.1-1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-7.1-2.1">
-            <p id="section-7.1-2.1.1"><strong>Code</strong>: The enumeration string (e.g., err_3.3.1)<a href="#section-7.1-2.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-7.1-2.2">
-            <p id="section-7.1-2.2.1"><strong>Category</strong>: The protocol stage or message type (e.g., Commit Ready errors)<a href="#section-7.1-2.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-7.1-2.3">
-            <p id="section-7.1-2.3.1"><strong>Type</strong>: The error type (e.g., badly formed message)<a href="#section-7.1-2.3.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-7.1-2.4">
-            <p id="section-7.1-2.4.1"><strong>Description</strong>: A brief description (e.g., mismatch transferContextId)<a href="#section-7.1-2.4.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-<table class="center" id="table-1">
-          <caption><a href="#table-1" class="selfRef">Table 1</a></caption>
-<thead>
-            <tr>
-              <th class="text-left" rowspan="1" colspan="1">Code</th>
-              <th class="text-left" rowspan="1" colspan="1">Category</th>
-              <th class="text-left" rowspan="1" colspan="1">Type</th>
-              <th class="text-left" rowspan="1" colspan="1">Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.1.1</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">invalid transferContextId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.1.2</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">invalid sessionId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.1.3</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">incorect transferInitClaimFormat</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.1.4</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">bad signature</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.1.11</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed claim</td>
-              <td class="text-left" rowspan="1" colspan="1">invalid digitalAssetId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.1.12</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed claim</td>
-              <td class="text-left" rowspan="1" colspan="1">invalid assetProfileId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.1.13</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed claim</td>
-              <td class="text-left" rowspan="1" colspan="1">invalid verifiedOriginatorEntityId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.1.14</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed claim</td>
-              <td class="text-left" rowspan="1" colspan="1">invalid verifiedBeneficiaryEntityId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.1.15</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed claim</td>
-              <td class="text-left" rowspan="1" colspan="1">invalid originatorPubkey</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.1.16</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed claim</td>
-              <td class="text-left" rowspan="1" colspan="1">invalid beneficiaryPubkey</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.1.17</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed claim</td>
-              <td class="text-left" rowspan="1" colspan="1">invalid senderGatewaySignaturePublicKey</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.1.18</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed claim</td>
-              <td class="text-left" rowspan="1" colspan="1">invalid receiverGatewaySignaturePublicKey</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.1.19</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed claim</td>
-              <td class="text-left" rowspan="1" colspan="1">invalid senderGatewayId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.1.20</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed claim</td>
-              <td class="text-left" rowspan="1" colspan="1">invalid recipientGatewayId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.1.31</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed parameter</td>
-              <td class="text-left" rowspan="1" colspan="1">unsupported gatewayDefaultSignatureAlgorithm</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.1.32</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed parameter</td>
-              <td class="text-left" rowspan="1" colspan="1">unsupported networkLockType</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.1.33</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed parameter</td>
-              <td class="text-left" rowspan="1" colspan="1">unsupported networkLockExpirationTime</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.1.34</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed parameter</td>
-              <td class="text-left" rowspan="1" colspan="1">unsupported gatewayTlsScheme</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.1.35</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed parameter</td>
-              <td class="text-left" rowspan="1" colspan="1">unsupported gatewayLoggingProfile</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.1.36</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed parameter</td>
-              <td class="text-left" rowspan="1" colspan="1">unsupported gatewayAccessControlProfile</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.2.1</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch transferContextId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.2.2</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch sessionId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.2.3</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch hashTransferInitClaim</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.2.4</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Proposal/Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">bad signature</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.3.1</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Commence errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch transferContextId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.3.2</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Commence errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch sessionId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.3.3</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Commence errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch hashTransferInitClaim</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.3.4</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Commence errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch hashPrevMessage</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.3.5</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Commence errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">bad signature</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.4.1</td>
-              <td class="text-left" rowspan="1" colspan="1">ACK Commence errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch transferContextId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.4.2</td>
-              <td class="text-left" rowspan="1" colspan="1">ACK Commence errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch sessionId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.4.3</td>
-              <td class="text-left" rowspan="1" colspan="1">ACK Commence errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch hashPrevMessage</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_1.4.4</td>
-              <td class="text-left" rowspan="1" colspan="1">ACK Commence errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">bad signature</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_2.2.1</td>
-              <td class="text-left" rowspan="1" colspan="1">Lock Assertion errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch transferContextId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_2.2.2</td>
-              <td class="text-left" rowspan="1" colspan="1">Lock Assertion errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch sessionId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_2.2.3</td>
-              <td class="text-left" rowspan="1" colspan="1">Lock Assertion errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">unsupported lockAssertionClaimFormat</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_2.2.4</td>
-              <td class="text-left" rowspan="1" colspan="1">Lock Assertion errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">unsupported lockAssertionExpiration</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_2.2.5</td>
-              <td class="text-left" rowspan="1" colspan="1">Lock Assertion errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch hashPrevMessage</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_2.2.6</td>
-              <td class="text-left" rowspan="1" colspan="1">Lock Assertion errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">bad signature</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_2.4.1</td>
-              <td class="text-left" rowspan="1" colspan="1">Lock Assertion Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch transferContextId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_2.4.2</td>
-              <td class="text-left" rowspan="1" colspan="1">Lock Assertion Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch sessionId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_2.4.3</td>
-              <td class="text-left" rowspan="1" colspan="1">Lock Assertion Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch hashPrevMessage</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_2.4.4</td>
-              <td class="text-left" rowspan="1" colspan="1">Lock Assertion Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">bad signature</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.1.1</td>
-              <td class="text-left" rowspan="1" colspan="1">Commit Preparation errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch transferContextId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.1.2</td>
-              <td class="text-left" rowspan="1" colspan="1">Commit Preparation errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch sessionId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.1.3</td>
-              <td class="text-left" rowspan="1" colspan="1">Commit Preparation errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch hashPrevMessage</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.1.4</td>
-              <td class="text-left" rowspan="1" colspan="1">Commit Preparation errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">bad signature</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.3.1</td>
-              <td class="text-left" rowspan="1" colspan="1">Commit Ready errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch transferContextId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.3.2</td>
-              <td class="text-left" rowspan="1" colspan="1">Commit Ready errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch sessionId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.3.3</td>
-              <td class="text-left" rowspan="1" colspan="1">Commit Ready errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch hashPrevMessage</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.3.4</td>
-              <td class="text-left" rowspan="1" colspan="1">Commit Ready errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">unsupported mintAssertionFormat</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.3.5</td>
-              <td class="text-left" rowspan="1" colspan="1">Commit Ready errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">bad signature</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.5.1</td>
-              <td class="text-left" rowspan="1" colspan="1">Commit Final Assertion errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch transferContextId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.5.2</td>
-              <td class="text-left" rowspan="1" colspan="1">Commit Final Assertion errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch sessionId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.5.3</td>
-              <td class="text-left" rowspan="1" colspan="1">Commit Final Assertion errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch hashPrevMessage</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.5.4</td>
-              <td class="text-left" rowspan="1" colspan="1">Commit Final Assertion errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">unsupported burnAssertionClaimFormat</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.5.5</td>
-              <td class="text-left" rowspan="1" colspan="1">Commit Final Assertion errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">bad signature</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.7.1</td>
-              <td class="text-left" rowspan="1" colspan="1">Commit Final Ack Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch transferContextId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.7.2</td>
-              <td class="text-left" rowspan="1" colspan="1">Commit Final Ack Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch sessionId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.7.3</td>
-              <td class="text-left" rowspan="1" colspan="1">Commit Final Ack Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch hashPrevMessage</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.7.4</td>
-              <td class="text-left" rowspan="1" colspan="1">Commit Final Ack Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">unsupported assignmentAssertionClaimFormat</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.7.5</td>
-              <td class="text-left" rowspan="1" colspan="1">Commit Final Ack Receipt errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">bad signature</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.9.1</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Complete errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch transferContextId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.9.2</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Complete errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch sessionId</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.9.3</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Complete errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch hashPrevMessage</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.9.4</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Complete errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">mismatch hashTransferCommence</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">err_3.9.5</td>
-              <td class="text-left" rowspan="1" colspan="1">Transfer Complete errors</td>
-              <td class="text-left" rowspan="1" colspan="1">badly formed message</td>
-              <td class="text-left" rowspan="1" colspan="1">bad signature</td>
-            </tr>
-          </tbody>
-        </table>
+<p id="section-7.1-1">TBD<a href="#section-7.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="urn-registration">
@@ -2083,54 +1861,7 @@ interpreted as carrying significance described in RFC 2119.<a href="#section-2-2
         <h3 id="name-protocol-error-codes">
 <a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-protocol-error-codes" class="section-name selfRef">Protocol Error Codes</a>
         </h3>
-<p id="section-8.1-1">The following error codes are defined for SATP protocol errors:<a href="#section-8.1-1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-8.1-2.1">
-            <p id="section-8.1-2.1.1">err_1.1: Invalid message type<a href="#section-8.1-2.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-8.1-2.2">
-            <p id="section-8.1-2.2.1">err_1.2: Invalid session ID<a href="#section-8.1-2.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-8.1-2.3">
-            <p id="section-8.1-2.3.1">err_1.3: Invalid transfer context ID<a href="#section-8.1-2.3.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-8.1-2.4">
-            <p id="section-8.1-2.4.1">err_1.4: Invalid signature<a href="#section-8.1-2.4.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-8.1-2.5">
-            <p id="section-8.1-2.5.1">err_1.5: Invalid hash value<a href="#section-8.1-2.5.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-8.1-2.6">
-            <p id="section-8.1-2.6.1">err_2.1: Asset not found<a href="#section-8.1-2.6.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-8.1-2.7">
-            <p id="section-8.1-2.7.1">err_2.2: Asset already locked<a href="#section-8.1-2.7.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-8.1-2.8">
-            <p id="section-8.1-2.8.1">err_2.3: Asset lock expired<a href="#section-8.1-2.8.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-8.1-2.9">
-            <p id="section-8.1-2.9.1">err_2.4: Insufficient permissions<a href="#section-8.1-2.9.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-8.1-2.10">
-            <p id="section-8.1-2.10.1">err_3.1: Network connection failure<a href="#section-8.1-2.10.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-8.1-2.11">
-            <p id="section-8.1-2.11.1">err_3.2: Gateway unavailable<a href="#section-8.1-2.11.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-8.1-2.12">
-            <p id="section-8.1-2.12.1">err_3.3: Timeout exceeded<a href="#section-8.1-2.12.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-8.1-2.13">
-            <p id="section-8.1-2.13.1">err_4.1: Unsupported credential scheme<a href="#section-8.1-2.13.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-8.1-2.14">
-            <p id="section-8.1-2.14.1">err_4.2: Invalid credential format<a href="#section-8.1-2.14.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-8.1-2.15">
-            <p id="section-8.1-2.15.1">err_4.3: Credential verification failed<a href="#section-8.1-2.15.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
+<p id="section-8.1-1">TBD<a href="#section-8.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2143,17 +1874,7 @@ interpreted as carrying significance described in RFC 2119.<a href="#section-2-2
 <div id="registry-core-contributors">
 <p id="section-9-1">The authors would like to thank the following people for their input and support:<a href="#section-9-1" class="pilcrow">¶</a></p>
 </div>
-<p id="section-9-2">Andre Augusto,
-Rafael Belchior,
-Alexandru Chiriac,
-Claire Facer,
-Martin Gfeller,
-Wes Hardaker,
-David Millman,
-Luke Riley,
-John Robotham,
-Orie Steele,
-Weijia Zhang.<a href="#section-9-2" class="pilcrow">¶</a></p>
+<p id="section-9-2">Andre, Rafael, Rama.<a href="#section-9-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
@@ -2239,6 +1960,10 @@ Weijia Zhang.<a href="#section-9-2" class="pilcrow">¶</a></p>
 <dt id="RFC5939">[RFC5939]</dt>
         <dd>
 <span class="refAuthor">Andreasen, F.</span>, <span class="refTitle">"Session Description Protocol (SDP) Capability Negotiation"</span>, <span class="seriesInfo">RFC 5939</span>, <span class="seriesInfo">DOI 10.17487/RFC5939</span>, <time datetime="2010-09" class="refDate">September 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5939">https://www.rfc-editor.org/rfc/rfc5939</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8785">[RFC8785]</dt>
+        <dd>
+<span class="refAuthor">Rundgren, A.</span>, <span class="refAuthor">Jordan, B.</span>, and <span class="refAuthor">S. Erdtman</span>, <span class="refTitle">"JSON Canonicalization Scheme (JCS)"</span>, <span class="seriesInfo">RFC 8785</span>, <span class="seriesInfo">DOI 10.17487/RFC8785</span>, <time datetime="2020-06" class="refDate">June 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8785">https://www.rfc-editor.org/rfc/rfc8785</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9334">[RFC9334]</dt>
         <dd>

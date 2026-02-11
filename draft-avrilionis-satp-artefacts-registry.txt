@@ -5,8 +5,8 @@
 Secure Asset Transfer Protocol                             D. Avrilionis
 Internet-Draft                                            Compellio S.A.
 Intended status: Informational                               T. Hardjono
-Expires: 8 August 2026                                               MIT
-                                                         4 February 2026
+Expires: 15 August 2026                                              MIT
+                                                        11 February 2026
 
 
                            Artefacts Registry
@@ -20,8 +20,7 @@ Abstract
    stored in the Artefacts Registry are network identifiers, entities
    identifiers, asset profiles, or asset instances.  Registries are are
    acting as persistent storage locations for records.  Once registered,
-   records cannot be removed.  New versions are appended in the Registry
-   without removing previous versions (append-only principle).
+   records can be updated in an append-only manner.
 
 About This Document
 
@@ -57,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 August 2026.
+   This Internet-Draft will expire on 15 August 2026.
 
 Copyright Notice
 
@@ -97,9 +96,17 @@ Table of Contents
        6.1.1.  Call
        6.1.2.  Return result
        6.1.3.  Error Message
-     6.2.  TAR Update
-     6.3.  TAR Read
+     6.2.  TAR Read
+       6.2.1.  Call
+       6.2.2.  Return result
+     6.3.  TAR Update
+       6.3.1.  Call
+       6.3.2.  Return result
+       6.3.3.  Error Message
      6.4.  TAR Deletion
+       6.4.1.  Call
+       6.4.2.  Return result
+       6.4.3.  Error Message
    7.  IANA Consideration
      7.1.  Registry API Error Codes
      7.2.  URN Registration
@@ -113,16 +120,17 @@ Table of Contents
 
 1.  Introduction
 
-   This memo proposes an API intended to be implemented by Registries in
-   the context of SATP.  The Registry is a component that exposes an API
-   allowing gateways to fetch artefacts related to the SAT protocol.
-   Examples of SATP artefacts are network identifiers, entities
-   identifiers, asset profiles, or asset instances.
+   This memo proposes an API intended to be implemented by Artefact
+   Registries in the context of SATP.  A Registry is a component that
+   exposes an API allowing gateways to fetch artefacts related to the
+   SAT protocol ("API3").  Examples of SATP artefacts are network
+   identifiers, entities identifiers, asset profiles, or asset
+   instances.
 
    Registries play an important role in maintaining record of artefacts
    that are important during the Setup Stage of SATP (a.k.a “Stage 0”).
    Registries are are acting as persistent storage locations for such
-   artefacts. once registered, artefacts cannot be removed.  New
+   artefacts.  Once registered, artefacts cannot be removed.  New
    versions are appended in the Registry without removing previous
    versions (append-only principle).  Readers are directed first to
    [REGARCH] for a description of the architecture underlying the
@@ -167,9 +175,9 @@ Table of Contents
          |        V                    |
          |      +---+----------+       |
          |      |   |          |       |
-         |      |   | Registry |       |
-         |      |API|    R1    |       |
-         |      |(3)|          |       |
+         |      |API| Registry |       |
+         |      |(3)|    R1    |       |
+         |      |   |          |       |
          |      +---+----------+       V
          |        ^               +---------+
          V        |               |   API1  |
@@ -192,8 +200,8 @@ Table of Contents
    during the setup stage (Stage-0) [STAGE0]
 
    Records stored in a registry are persisted in the form of Tokenized
-   Artefacts.  In summary the main concepts of a Tokenized Arefact
-   Record are as follows:
+   Artefacts Record (TAR).  In summary the main concepts of a TAR are as
+   follows:
 
    *  The Artefact: This is a piece of information containing digitized
       data or pointing to assets.  It can range from configuration data,
@@ -296,13 +304,13 @@ Table of Contents
    Algorithms" registry established by [JWA] or be a value that contains
    a Collision-Resistant Name.
 
-   All implementations MUST support a common default of "ES256", which
+   All implementations must support a common default of "ES256", which
    is the ECDSA signature algorithm with the P-256 curve and the SHA-256
    hash function.
 
 5.3.7.  JSON Canonicalisation
 
-   TBD
+   Registries must suport JSON Canonicalization [RFC8785].
 
 6.  Overview of API endpoints
 
@@ -364,342 +372,108 @@ Table of Contents
 
 6.1.3.  Error Message
 
-6.2.  TAR Update
+   TBD
 
-6.3.  TAR Read
+6.2.  TAR Read
+
+   This endpoint retrieves a TAR previously created or updated in the
+   Registry.
+
+6.2.1.  Call
+
+   The parameters of this message consist of the following: * tarid
+   REQUIRED:
+   urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69
+
+6.2.2.  Return result
+
+   json { "id": "urn:tar:eip155.444444444500:6850be85c8c264ef1562ebae547
+   fd7086c281774", "receipt": "23f2769a-2cce-48f7-9612-4c3dd7a918b8",
+   "data": { "@context": "urn:tar:eip155.444444444500:81d078284729795641
+   0ec1a674e60a78fff14b69", "owner": { "ownerID":
+   "urn:tar:eip155.137:d9D6916A0A65Fe2aC212243E8f2252143D0c7dE4" },
+   "performance": { "description": { "en": "Triplicity band live
+   performance" }, "doorTime": "2024-11-16T21:00:00Z+02:00", "location":
+   "Poetry Bar", "startTime": "2024-11-16T21:30:00Z+02:00", "url":
+   "https://poetry.bar/20241116/triplicity", "venueID":
+   "urn:tar:eip155.137:2C3a4C8a34404Ee0145f588536E94D47421dC891" },
+   "price": { "currency": "EUR", "value": "10" }, "seat": {
+   "seatLocation": "VIP", "seatNumber": "A1" }, "validity": { "used":
+   false } }, "checksum":
+   "0xBA66E005328F45E1AE3CCE97F3404E4D4365D13443214CB968A49BB5948F98F3",
+   "version": 1, "_sdHashes": [] } ### Error Message TBD
+
+6.3.  TAR Update
+
+   Updates the TAR by registering a new version for the specific TARID
+
+6.3.1.  Call
+
+   The parameters of this message consist of the following: * tarid
+   REQUIRED:
+   urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69
+
+   *  tarBody REQUIRED: json { "@context": "urn:tar:eip155.444444444500:
+      81d0782847297956410ec1a674e60a78fff14b69", "owner": { "ownerID":
+      "urn:tar:eip155.137:d9D6916A0A65Fe2aC212243E8f2252143D0c7dE3" },
+      "performance": { "description": { "en": "Triplicity band live
+      performance" }, "doorTime": "2024-11-16T21:00:00Z+02:00",
+      "location": "Poetry Bar", "startTime":
+      "2024-11-16T21:30:00Z+02:00", "url": "https://poetry.bar/20241116/
+      triplicity", "venueID":
+      "urn:tar:eip155.137:2C3a4C8a34404Ee0145f588536E94D47421dC891" },
+      "price": { "currency": "EUR", "value": "10" }, "seat": {
+      "seatLocation": "VIP", "seatNumber": "A2" }, "validity": { "used":
+      false } }
+
+6.3.2.  Return result
+
+   json { "id": "urn:tar:eip155.444444444500:6850be85c8c264ef1562ebae547
+   fd7086c281774", "receipt": "23f2769a-2cce-48f7-9612-4c3dd7a918b8",
+   "data": { "@context": "urn:tar:eip155.444444444500:81d078284729795641
+   0ec1a674e60a78fff14b69", "owner": { "ownerID":
+   "urn:tar:eip155.137:d9D6916A0A65Fe2aC212243E8f2252143D0c7dE4" },
+   "performance": { "description": { "en": "Triplicity band live
+   performance" }, "doorTime": "2024-11-16T21:00:00Z+02:00", "location":
+   "Poetry Bar", "startTime": "2024-11-16T21:30:00Z+02:00", "url":
+   "https://poetry.bar/20241116/triplicity", "venueID":
+   "urn:tar:eip155.137:2C3a4C8a34404Ee0145f588536E94D47421dC891" },
+   "price": { "currency": "EUR", "value": "10" }, "seat": {
+   "seatLocation": "VIP", "seatNumber": "A1" }, "validity": { "used":
+   false } }, "checksum":
+   "0xBA66E005328F45E1AE3CCE97F3404E4D4365D13443214CB968A49BB5948F98F3",
+   "version": 1, "_sdHashes": [] }
+
+6.3.3.  Error Message
+
+   TBD
 
 6.4.  TAR Deletion
 
+   Archives the TAR
+
+6.4.1.  Call
+
+   The parameters of this message consist of the following: * tarid
+   REQUIRED:
+   urn:tar:eip155.444444444500:81d0782847297956410ec1a674e60a78fff14b69
+
+6.4.2.  Return result
+
+   A success code
+
+6.4.3.  Error Message
+
+   TBD
+
 7.  IANA Consideration
 
-   The following request is being made to IANA.
+   The tar namespace might follow a hierachichal structure under the
+   general URN satp namespace, i.e. urn:satp:tar.
 
 7.1.  Registry API Error Codes
 
-   This registry defines the error codes used in SATP protocol messages.
-   Each entry consists of:
-
-   *  *Code*: The enumeration string (e.g., err_3.3.1)
-
-   *  *Category*: The protocol stage or message type (e.g., Commit Ready
-      errors)
-
-   *  *Type*: The error type (e.g., badly formed message)
-
-   *  *Description*: A brief description (e.g., mismatch
-      transferContextId)
-
-   +==========+===========+=========+=================================+
-   |Code      |Category   |Type     |Description                      |
-   +==========+===========+=========+=================================+
-   |err_1.1.1 |Transfer   |badly    |invalid transferContextId        |
-   |          |Proposal/  |formed   |                                 |
-   |          |Receipt    |message  |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.1.2 |Transfer   |badly    |invalid sessionId                |
-   |          |Proposal/  |formed   |                                 |
-   |          |Receipt    |message  |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.1.3 |Transfer   |badly    |incorect transferInitClaimFormat |
-   |          |Proposal/  |formed   |                                 |
-   |          |Receipt    |message  |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.1.4 |Transfer   |badly    |bad signature                    |
-   |          |Proposal/  |formed   |                                 |
-   |          |Receipt    |message  |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.1.11|Transfer   |badly    |invalid digitalAssetId           |
-   |          |Proposal/  |formed   |                                 |
-   |          |Receipt    |claim    |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.1.12|Transfer   |badly    |invalid assetProfileId           |
-   |          |Proposal/  |formed   |                                 |
-   |          |Receipt    |claim    |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.1.13|Transfer   |badly    |invalid                          |
-   |          |Proposal/  |formed   |verifiedOriginatorEntityId       |
-   |          |Receipt    |claim    |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.1.14|Transfer   |badly    |invalid                          |
-   |          |Proposal/  |formed   |verifiedBeneficiaryEntityId      |
-   |          |Receipt    |claim    |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.1.15|Transfer   |badly    |invalid originatorPubkey         |
-   |          |Proposal/  |formed   |                                 |
-   |          |Receipt    |claim    |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.1.16|Transfer   |badly    |invalid beneficiaryPubkey        |
-   |          |Proposal/  |formed   |                                 |
-   |          |Receipt    |claim    |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.1.17|Transfer   |badly    |invalid                          |
-   |          |Proposal/  |formed   |senderGatewaySignaturePublicKey  |
-   |          |Receipt    |claim    |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.1.18|Transfer   |badly    |invalid                          |
-   |          |Proposal/  |formed   |receiverGatewaySignaturePublicKey|
-   |          |Receipt    |claim    |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.1.19|Transfer   |badly    |invalid senderGatewayId          |
-   |          |Proposal/  |formed   |                                 |
-   |          |Receipt    |claim    |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.1.20|Transfer   |badly    |invalid recipientGatewayId       |
-   |          |Proposal/  |formed   |                                 |
-   |          |Receipt    |claim    |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.1.31|Transfer   |badly    |unsupported                      |
-   |          |Proposal/  |formed   |gatewayDefaultSignatureAlgorithm |
-   |          |Receipt    |parameter|                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.1.32|Transfer   |badly    |unsupported networkLockType      |
-   |          |Proposal/  |formed   |                                 |
-   |          |Receipt    |parameter|                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.1.33|Transfer   |badly    |unsupported                      |
-   |          |Proposal/  |formed   |networkLockExpirationTime        |
-   |          |Receipt    |parameter|                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.1.34|Transfer   |badly    |unsupported gatewayTlsScheme     |
-   |          |Proposal/  |formed   |                                 |
-   |          |Receipt    |parameter|                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.1.35|Transfer   |badly    |unsupported gatewayLoggingProfile|
-   |          |Proposal/  |formed   |                                 |
-   |          |Receipt    |parameter|                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.1.36|Transfer   |badly    |unsupported                      |
-   |          |Proposal/  |formed   |gatewayAccessControlProfile      |
-   |          |Receipt    |parameter|                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.2.1 |Transfer   |badly    |mismatch transferContextId       |
-   |          |Proposal/  |formed   |                                 |
-   |          |Receipt    |message  |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.2.2 |Transfer   |badly    |mismatch sessionId               |
-   |          |Proposal/  |formed   |                                 |
-   |          |Receipt    |message  |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.2.3 |Transfer   |badly    |mismatch hashTransferInitClaim   |
-   |          |Proposal/  |formed   |                                 |
-   |          |Receipt    |message  |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.2.4 |Transfer   |badly    |bad signature                    |
-   |          |Proposal/  |formed   |                                 |
-   |          |Receipt    |message  |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.3.1 |Transfer   |badly    |mismatch transferContextId       |
-   |          |Commence   |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.3.2 |Transfer   |badly    |mismatch sessionId               |
-   |          |Commence   |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.3.3 |Transfer   |badly    |mismatch hashTransferInitClaim   |
-   |          |Commence   |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.3.4 |Transfer   |badly    |mismatch hashPrevMessage         |
-   |          |Commence   |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.3.5 |Transfer   |badly    |bad signature                    |
-   |          |Commence   |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.4.1 |ACK        |badly    |mismatch transferContextId       |
-   |          |Commence   |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.4.2 |ACK        |badly    |mismatch sessionId               |
-   |          |Commence   |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.4.3 |ACK        |badly    |mismatch hashPrevMessage         |
-   |          |Commence   |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_1.4.4 |ACK        |badly    |bad signature                    |
-   |          |Commence   |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_2.2.1 |Lock       |badly    |mismatch transferContextId       |
-   |          |Assertion  |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_2.2.2 |Lock       |badly    |mismatch sessionId               |
-   |          |Assertion  |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_2.2.3 |Lock       |badly    |unsupported                      |
-   |          |Assertion  |formed   |lockAssertionClaimFormat         |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_2.2.4 |Lock       |badly    |unsupported                      |
-   |          |Assertion  |formed   |lockAssertionExpiration          |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_2.2.5 |Lock       |badly    |mismatch hashPrevMessage         |
-   |          |Assertion  |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_2.2.6 |Lock       |badly    |bad signature                    |
-   |          |Assertion  |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_2.4.1 |Lock       |badly    |mismatch transferContextId       |
-   |          |Assertion  |formed   |                                 |
-   |          |Receipt    |message  |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_2.4.2 |Lock       |badly    |mismatch sessionId               |
-   |          |Assertion  |formed   |                                 |
-   |          |Receipt    |message  |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_2.4.3 |Lock       |badly    |mismatch hashPrevMessage         |
-   |          |Assertion  |formed   |                                 |
-   |          |Receipt    |message  |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_2.4.4 |Lock       |badly    |bad signature                    |
-   |          |Assertion  |formed   |                                 |
-   |          |Receipt    |message  |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.1.1 |Commit     |badly    |mismatch transferContextId       |
-   |          |Preparation|formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.1.2 |Commit     |badly    |mismatch sessionId               |
-   |          |Preparation|formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.1.3 |Commit     |badly    |mismatch hashPrevMessage         |
-   |          |Preparation|formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.1.4 |Commit     |badly    |bad signature                    |
-   |          |Preparation|formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.3.1 |Commit     |badly    |mismatch transferContextId       |
-   |          |Ready      |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.3.2 |Commit     |badly    |mismatch sessionId               |
-   |          |Ready      |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.3.3 |Commit     |badly    |mismatch hashPrevMessage         |
-   |          |Ready      |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.3.4 |Commit     |badly    |unsupported mintAssertionFormat  |
-   |          |Ready      |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.3.5 |Commit     |badly    |bad signature                    |
-   |          |Ready      |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.5.1 |Commit     |badly    |mismatch transferContextId       |
-   |          |Final      |formed   |                                 |
-   |          |Assertion  |message  |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.5.2 |Commit     |badly    |mismatch sessionId               |
-   |          |Final      |formed   |                                 |
-   |          |Assertion  |message  |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.5.3 |Commit     |badly    |mismatch hashPrevMessage         |
-   |          |Final      |formed   |                                 |
-   |          |Assertion  |message  |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.5.4 |Commit     |badly    |unsupported                      |
-   |          |Final      |formed   |burnAssertionClaimFormat         |
-   |          |Assertion  |message  |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.5.5 |Commit     |badly    |bad signature                    |
-   |          |Final      |formed   |                                 |
-   |          |Assertion  |message  |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.7.1 |Commit     |badly    |mismatch transferContextId       |
-   |          |Final Ack  |formed   |                                 |
-   |          |Receipt    |message  |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.7.2 |Commit     |badly    |mismatch sessionId               |
-   |          |Final Ack  |formed   |                                 |
-   |          |Receipt    |message  |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.7.3 |Commit     |badly    |mismatch hashPrevMessage         |
-   |          |Final Ack  |formed   |                                 |
-   |          |Receipt    |message  |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.7.4 |Commit     |badly    |unsupported                      |
-   |          |Final Ack  |formed   |assignmentAssertionClaimFormat   |
-   |          |Receipt    |message  |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.7.5 |Commit     |badly    |bad signature                    |
-   |          |Final Ack  |formed   |                                 |
-   |          |Receipt    |message  |                                 |
-   |          |errors     |         |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.9.1 |Transfer   |badly    |mismatch transferContextId       |
-   |          |Complete   |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.9.2 |Transfer   |badly    |mismatch sessionId               |
-   |          |Complete   |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.9.3 |Transfer   |badly    |mismatch hashPrevMessage         |
-   |          |Complete   |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.9.4 |Transfer   |badly    |mismatch hashTransferCommence    |
-   |          |Complete   |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-   |err_3.9.5 |Transfer   |badly    |bad signature                    |
-   |          |Complete   |formed   |                                 |
-   |          |errors     |message  |                                 |
-   +----------+-----------+---------+---------------------------------+
-
-                                 Table 1
+   TBD
 
 7.2.  URN Registration
 
@@ -720,46 +494,14 @@ Table of Contents
 
 8.1.  Protocol Error Codes
 
-   The following error codes are defined for SATP protocol errors:
-
-   *  err_1.1: Invalid message type
-
-   *  err_1.2: Invalid session ID
-
-   *  err_1.3: Invalid transfer context ID
-
-   *  err_1.4: Invalid signature
-
-   *  err_1.5: Invalid hash value
-
-   *  err_2.1: Asset not found
-
-   *  err_2.2: Asset already locked
-
-   *  err_2.3: Asset lock expired
-
-   *  err_2.4: Insufficient permissions
-
-   *  err_3.1: Network connection failure
-
-   *  err_3.2: Gateway unavailable
-
-   *  err_3.3: Timeout exceeded
-
-   *  err_4.1: Unsupported credential scheme
-
-   *  err_4.2: Invalid credential format
-
-   *  err_4.3: Credential verification failed
+   TBD
 
 9.  Acknowledgements
 
    The authors would like to thank the following people for their input
    and support:
 
-   Andre Augusto, Rafael Belchior, Alexandru Chiriac, Claire Facer,
-   Martin Gfeller, Wes Hardaker, David Millman, Luke Riley, John
-   Robotham, Orie Steele, Weijia Zhang.
+   Andre, Rafael, Rama.
 
 10.  References
 
@@ -839,6 +581,11 @@ Table of Contents
    [RFC5939]  Andreasen, F., "Session Description Protocol (SDP)
               Capability Negotiation", RFC 5939, DOI 10.17487/RFC5939,
               September 2010, <https://www.rfc-editor.org/rfc/rfc5939>.
+
+   [RFC8785]  Rundgren, A., Jordan, B., and S. Erdtman, "JSON
+              Canonicalization Scheme (JCS)", RFC 8785,
+              DOI 10.17487/RFC8785, June 2020,
+              <https://www.rfc-editor.org/rfc/rfc8785>.
 
    [RFC9334]  Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
               W. Pan, "Remote ATtestation procedureS (RATS)
